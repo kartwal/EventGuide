@@ -17,10 +17,10 @@
     </feature>
     <name>EventGuide</name>
     <description>
-        A blank PhoneGap app.
+        Search, add, participate.
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="kartwal@kartwal.pl" href="kartwal.pl">
+        Adrianna Gałka, Kamil Walas
     </author>
     <content src="index.html" />
     <access origin="*" />
