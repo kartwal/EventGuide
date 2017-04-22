@@ -1,7 +1,10 @@
 function validateLogin() {
   $("#loginForm").validate({
     rules: {
-      login: "required",
+      email: {
+        required: true,
+        email: true
+      },
       password: {
         required: true,
         minlength: 5
@@ -9,7 +12,7 @@ function validateLogin() {
     },
 
     messages: {
-      login: "Podaj login",
+      email: "Podaj email na którym założone zostało konto",
       password: {
         required: "Podaj hasło",
         minlength: "Hasło posiadać musi minimum 5 znaków"
@@ -23,10 +26,10 @@ function validateLogin() {
           values[field.name] = field.value;
       });
 
-      navigator.notification.activityStart("Please Wait", "Its loading.....");
+      // navigator.notification.activityStart("Please Wait", "Its loading.....");
       var postTo = 'http://kartwal.ayz.pl/EventGuide_API/v1/index.php/login';
 
-    $.post(postTo,({email: values["login"], password: values["password"]}),
+    $.post(postTo,({email: values["email"], password: values["password"]}),
     function(data) {
 
       console.log( data.error );
@@ -34,11 +37,9 @@ function validateLogin() {
           if (data.error === true)
           {
             console.log( data.error );
-            return false
           }
           else {
-
-            return true
+            console.log("ok");
             $(':mobile-pagecontainer').pagecontainer('change', '#listPage');
 
           }
@@ -47,6 +48,8 @@ function validateLogin() {
             console.log("błąd połączenia");
         }
         },'json');
+        return false;
+
     }
   });
 }
@@ -64,7 +67,6 @@ function onConfirm(buttonIndex) {
 function validateRegister() {
   $("#registerForm").validate({
     rules: {
-      login: "required",
       email: {
         required: true,
         email: true
@@ -76,7 +78,7 @@ function validateRegister() {
     },
 
     messages: {
-      login: "Podaj login",
+      email: "Podaj login",
       password: {
         required: "Podaj hasło",
         minlength: "Hasło posiadać musi minimum 5 znaków"
