@@ -5,12 +5,13 @@
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <title>EventGuide</title>
         <script type="text/javascript" src="cordova.js"></script>
-        <link rel="stylesheet" href="css/style.css"/>
+        <!-- <link rel="stylesheet" href="css/style.css"/> -->
         <link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css" />
     		<script src="jquery/jquery-2.1.4.min.js"></script>
     		<script src="jquery/jquery.mobile-1.4.5.min.js"></script>
         <script src="jquery/jquery.validate.min.js"></script>
-        <script src="js/loginValidation.js"></script>
+        <script src="js/formValidation.js"></script>
+        <script src="js/navigation.js"></script>
     </head>
     <body>
 
@@ -39,6 +40,40 @@
             </form>
 
           </div>
+            <div data-role="footer" data-position="fixed" align="center">
+                <a href="#register" data-role="button" data-icon="plus">Zarejestruj</a>
+            </div>
+  		  </div>
+
+  		</div>
+
+      <div data-role="page" id="register">
+
+  		  <div data-role="header">
+  			     <h1>EventGuide</h1>
+             <a data-rel="back">Back</a>
+  		  </div>
+
+  		  <div data-role="main" class="ui-content">
+
+          <div class="container">
+            <h2 id="formHeader" align="center">Logowanie</h2>
+
+            <form name="login" id = "registerForm">
+
+              <label for="login">Login</label>
+              <input type="text" name="login" id="login" placeholder="Login"/>
+
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" placeholder="Email"/>
+
+              <label for="password">Hasło</label>
+              <input type="password" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"/>
+              <br>
+              <button onclick="validateRegister()" >Rejestruj</button>
+            </form>
+
+          </div>
 
   		  </div>
 
@@ -52,16 +87,17 @@
 
   		  <div data-role="header" data-position="fixed">
   			     <h1>EventGuide</h1>
-             <a href="#settings" data-icon="user" class="ui-btn-right"/>Ustawienia</a>
+             <a href="#settings" data-icon="user" data-role="button" class="ui-btn-right" data-iconpos="notext"/></a>
   		  </div>
 
   		  <div data-role="main" class="ui-content">
 
-          <ul data-role="listview" data-inset="true">
+          <ul data-role="listview" data-inset="false">
             <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
+            <img src="./testImage/testImage.gif">
+            <h1>Broken Bells</h1>
+            <h5>Broken Bells</h5>
+            <p>Broken Bells Broken Bells Broken Bells Broken Bells Broken Bells Broken Bells Broken Bells Broken Bells Broken Bells Broken Bells</p></a>
             </li>
             <li><a href="#">
                 <img src="./testImage/testImage.gif">
@@ -172,9 +208,12 @@
 
 
 
+
+
       <div data-role="page" id="settings">
 
   		  <div data-role="header">
+          <a data-rel="back">Back</a>
   			     <h1>EventGuide</h1>
   		  </div>
 
