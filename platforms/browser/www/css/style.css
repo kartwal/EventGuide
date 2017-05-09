@@ -1,28 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 
-/* Styles */
-* {
-  margin: 0;
-  padding: 0;
+.searchForm {
+  top: 0;
 }
-
-body {
-  font-family: "Open Sans";
-  font-size: 14px;
-}
-
-.container {
-  width: 500px;
-  margin: 25px auto;
-}
-
-form {
-  padding: 20px;
-  background: #2c3e50;
+.loginForm {
   color: #fff;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 300px;
+  height: 200px;
+  margin: auto;
 }
 form label,
 form input,
@@ -32,12 +23,13 @@ form button {
   display: block;
   width: 100%;
 }
+
 form input {
   height: 25px;
   line-height: 25px;
   background: #fff;
   color: #000;
-  padding: 0 6px;
+  padding: 0 0px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -45,15 +37,31 @@ form input {
 form button {
   height: 40px;
   line-height: 30px;
-  background: #e67e22;
+  background: #fff !important;
   color: #fff;
   margin-top: 10px;
   cursor: pointer;
 }
 form .error {
   color: #ff0000;
+  font-size: 10px;
+}
+
+.formButton {
+  color: red;
 }
 
 #formHeader {
-  color : #2c3e50;
+  color :#fff;
+  font-family: "Ostrich";
+  font-weight: lighter;
+  font-size: 30px;
 }
+
+.Centerer
+{
+  margin:0 auto;
+  background: red;
+}
+
+img {max-width:100%;}

@@ -6,12 +6,24 @@
         <title>EventGuide</title>
         <script type="text/javascript" src="cordova.js"></script>
         <!-- <link rel="stylesheet" href="css/style.css"/> -->
-        <link rel="stylesheet" href="jquery/jquery.mobile-1.4.5.min.css" />
+
+        <!-- <link href="flatui/dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="flatui/dist/css/flat-ui.css" rel="stylesheet">
+
+        <link rel="shortcut icon" href="../../dist/img/favicon.ico"> -->
+
+        <link rel="stylesheet" type="text/css" href="jquery/jquery.mobile-1.4.5.css" />
+        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/customStyle.css"/>
+
+
     		<script src="jquery/jquery-2.1.4.min.js"></script>
     		<script src="jquery/jquery.mobile-1.4.5.min.js"></script>
         <script src="jquery/jquery.validate.min.js"></script>
         <script src="js/formValidation.js"></script>
         <script src="js/navigation.js"></script>
+        <script scr="js/multilinedText.js"></script>
     </head>
     <body>
 
@@ -19,16 +31,14 @@
 
       <div data-role="page" id="login">
 
-  		  <div data-role="header">
-  			     <h1>EventGuide</h1>
+        <div data-role="header" data-position="fixed">
+  			     <h1><img border="0" src="img/EventGuideLogoSmall.png" style="float:left;display:inline" class="center"/></h1>
   		  </div>
 
   		  <div data-role="main" class="ui-content">
 
           <div class="container">
-            <h2 id="formHeader" align="center">Logowanie</h2>
-
-            <form name="login" id = "loginForm">
+            <form name="login" id = "loginForm" class="loginForm">
 
               <label for="email">Email</label>
               <input type="text" name="email" id="email" placeholder="Podaj adres email"/>
@@ -36,30 +46,30 @@
               <label for="password">Hasło</label>
               <input type="password" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"/>
               <br>
-              <button onclick="validateLogin()" >Zaloguj</button>
+              <button onclick="validateLogin()" data-role="button" data-theme="c" class="ui-btn-hidden">Zaloguj</button>
+
+              <label id="topPadding">Nie posiadasz konta ?</label>
+              <a href="#register" data-role="button" data-theme="c" class="ui-btn-hidden">Zarejestruj</a>
             </form>
 
           </div>
-            <div data-role="footer" data-position="fixed" align="center">
-                <a href="#register" data-role="button" data-icon="plus">Zarejestruj</a>
-            </div>
+
   		  </div>
 
   		</div>
 
+
       <div data-role="page" id="register">
 
-  		  <div data-role="header">
-  			     <h1>EventGuide</h1>
-             <a data-rel="back">Back</a>
-  		  </div>
+        <div data-role="header" data-position="fixed">
+             <h1><img border="0" src="img/EventGuideLogoSmall.png" style="float:left;display:inline" class="center"/></h1>
+        </div>
 
   		  <div data-role="main" class="ui-content">
 
           <div class="container">
-            <h2 id="formHeader" align="center">Logowanie</h2>
 
-            <form name="login" id = "registerForm">
+            <form name="register" id = "registerForm" class="loginForm">
 
               <label for="email">Email</label>
               <input type="email" name="email" id="email" placeholder="Email"/>
@@ -67,7 +77,9 @@
               <label for="password">Hasło</label>
               <input type="password" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"/>
               <br>
-              <button onclick="validateRegister()" >Rejestruj</button>
+              <button onclick="validateRegister()" data-role="button" data-theme="c" class="ui-btn-hidden">Register</button>
+              <br>
+              <a data-rel="back" data-role="button" data-theme="c" class="ui-btn-hidden">Cancel</a>
             </form>
 
           </div>
@@ -78,126 +90,68 @@
 
 
 
-
-
       <div data-role="page" id="listPage">
 
   		  <div data-role="header" data-position="fixed">
-  			     <h1>EventGuide</h1>
-             <a href="#settings" data-icon="user" data-role="button" class="ui-btn-right" data-iconpos="notext"/></a>
+              <!-- <a href="#settings" data-icon="user" data-role="button" class="ui-btn-left" data-iconpos="notext"/></a> -->
+  			     <h1><img border="0" src="img/EventGuideLogoSmall.png" style="float:left;display:inline" class="center"/></h1>
+             <a href="#settings" class="ui-btn-right buttonHeader" data-iconpos="notext"/><img src="img/icons/userIcon.png"></a>
   		  </div>
 
   		  <div data-role="main" class="ui-content">
 
-          <ul data-role="listview" data-inset="false">
-            <li><a href="#">
-            <img src="./testImage/testImage.gif">
-            <h1>Broken Bells</h1>
-            <h5>Broken Bells</h5>
-            <p>Broken Bells Broken Bells Broken Bells Broken Bells Broken Bells Broken Bells Broken Bells Broken Bells Broken Bells Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Warning</h2>
-            <p>Hot Chip</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Wolfgang Amadeus Phoenix</h2>
-            <p>Phoenix</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
-            <li><a href="#">
-                <img src="./testImage/testImage.gif">
-            <h2>Broken Bells</h2>
-            <p>Broken Bells</p></a>
-            </li>
+          <form class="ui-filterable">
+              <input id="filterBasic-input" data-type="search" data-inline="true" class="searchForm">
+          </form>
 
-          </ul>
+            <ul data-role="listview" data-filter="true" data-input="#filterBasic-input">
+              <li class="listItem">
+                <a id="eventListItem" href="#">
+                  <img src="testImage/testImage.gif">
+                  <div class="listTitle">TEST</div>
+                  <div class="listDesc">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</div>
+                  <div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">10.10.2017</div>
+                  <div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">1000</div>
+                </a>
+              </li>
+              <li class="listItem">
+                <a id="eventListItem" href="#">
+                  <img src="testImage/testImage.gif">
+                  <div class="listTitle">TEST</div>
+                  <div class="listDesc">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</div>
+                  <div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">10.10.2017</div>
+                  <div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">1000</div>
+                </a>
+              </li>
+              <li class="listItem">
+                <a id="eventListItem" href="#">
+                  <img src="testImage/testImage.gif">
+                  <div class="listTitle">TEST</div>
+                  <div class="listDesc">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</div>
+                  <div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">10.10.2017</div>
+                  <div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">1000</div>
+                </a>
+              </li>
+              <li class="listItem">
+                <a id="eventListItem" href="#">
+                  <img src="testImage/testImage.gif">
+                  <div class="listTitle">TEST</div>
+                  <div class="listDesc">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</div>
+                  <div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">10.10.2017</div>
+                  <div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">1000</div>
+                </a>
+              </li>
+            </ul>
+
 
   		  </div>
 
         <div data-role="footer" data-position="fixed" align="center">
-            <a href="#login" data-role="button" data-icon="eye">Skanuj kod QR</a>
+            <a href="#" class="buttonToolbar">
+              <img src="img/icons/qrIcon.png">
+              <div>Skanuj QR</div>
+            </a>
+            <!-- <a href="#settings" class="ui-btn-right buttonHeader" data-iconpos="notext" height="15px"/><img src="img/icons/userIcon.png"></a> -->
         </div>
   		</div>
 
