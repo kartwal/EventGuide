@@ -58,7 +58,7 @@ div.ui-input-search {
   padding-top: -10px;
   padding-right: 0px;
   padding-left: 0px;
-  padding-bottom: 10px;
+  padding-bottom: -10px;
   margin-bottom: 0px;
   margin-top: -5px;
   margin-left: -10px;
@@ -120,6 +120,7 @@ div.ui-input-search {
   background:  #22313F !important;
   border: none;
   float: right;
+  shadow: false;
   height: 20px
 }
 

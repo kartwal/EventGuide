@@ -1,0 +1,40 @@
+.eventTitle {
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.eventImage {
+  margin-top: -15px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 80px;
+  display: block;
+}
+
+.popupHeader{
+  color: white;
+}
+
+.eventDescription{
+  color: white;
+  font-size: 13px;
+  font-weight: lighter !important;
+  margin-top: 20px;
+}
+
+.eventTable{
+  color: white;
+  margin-left: -7px;
+  padding-top: 10px;
+  font-weight: lighter !important;
+}
+
+/*span{
+  font-weight: lighter;
+
+}*/
+
+#map-canvas { width: 100%; height: 100px; padding: 0; }

@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
         <title>EventGuide</title>
         <script type="text/javascript" src="cordova.js"></script>
         <!-- <link rel="stylesheet" href="css/style.css"/> -->
@@ -16,6 +17,7 @@
         <link rel="stylesheet" type="text/css" href="jquery/jquery.mobile-1.4.5.css" />
         <link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/customStyle.css"/>
+        <link rel="stylesheet" href="css/detailsView.css"/>
 
 
     		<script src="jquery/jquery-2.1.4.min.js"></script>
@@ -46,10 +48,10 @@
               <label for="password">Hasło</label>
               <input type="password" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"/>
               <br>
-              <button onclick="validateLogin()" data-role="button" data-theme="c" class="ui-btn-hidden">Zaloguj</button>
+              <button onclick="validateLogin()" data-role="button" data-transition="slide" data-theme="c" class="ui-btn-hidden">Zaloguj</button>
 
               <label id="topPadding">Nie posiadasz konta ?</label>
-              <a href="#register" data-role="button" data-theme="c" class="ui-btn-hidden">Zarejestruj</a>
+              <a href="#register" data-role="button" data-theme="c" class="ui-btn-hidden" data-transition="slideup">Zarejestruj</a>
             </form>
 
           </div>
@@ -101,12 +103,12 @@
   		  <div data-role="main" class="ui-content">
 
           <form class="ui-filterable">
-              <input id="filterBasic-input" data-type="search" data-inline="true" class="searchForm">
+              <input id="filterBasic-input" data-type="search" data-inline="true" class="searchForm" placeholder="Search Event...">
           </form>
 
             <ul data-role="listview" data-filter="true" data-input="#filterBasic-input">
               <li class="listItem">
-                <a id="eventListItem" href="#">
+                <a id="eventListItem" href="#detailPage" data-transition="slide">
                   <img src="testImage/testImage.gif">
                   <div class="listTitle">TEST</div>
                   <div class="listDesc">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</div>
@@ -147,15 +149,107 @@
   		  </div>
 
         <div data-role="footer" data-position="fixed" align="center">
-            <a href="#" class="buttonToolbar">
+            <a class="buttonToolbar" onclick="scan()" href="#">
               <img src="img/icons/qrIcon.png">
-              <div>Skanuj QR</div>
             </a>
+
+            <button onclick="scan()" data-role="button" data-theme="c">testbutton</button>
             <!-- <a href="#settings" class="ui-btn-right buttonHeader" data-iconpos="notext" height="15px"/><img src="img/icons/userIcon.png"></a> -->
         </div>
   		</div>
 
+      <div data-role="page" id="display">
+    <div data-role="header">
+        <a target="_blank" href="#home" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+        <h1>Display</h1>
+    </div>
 
+    <div data-role="main" class="ui-content">
+        <table data-role="table" data-mode="column" id="allTable" class="ui-responsive table-stroke">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+      <div data-role="page" id="detailPage">
+
+  		  <div data-role="header" data-position="fixed">
+              <!-- <a href="#settings" data-icon="user" data-role="button" class="ui-btn-left" data-iconpos="notext"/></a> -->
+  			     <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
+             <a href="#settings" class="ui-btn-right buttonHeader" data-iconpos="notext"/><img src="img/icons/userIcon.png"></a>
+  		  </div>
+
+  		  <div data-role="main" class="ui-content">
+          <div><img class="eventImage" src="testImage/testImage.gif"></div>
+          <div class="eventTitle">Event Title</div>
+          <div class="eventDescription">
+              Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker. Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker
+          </div>
+
+
+          <div class="eventTable">
+
+            <table data-role="table" class="ui-responsive">
+              <thead>
+                <tr>
+                  <th>Event ID</th>
+                  <th>Event Start Date</th>
+                  <th>Event End Date</th>
+                  <th>Tickets</th>
+                  <th>Card Payment</th>
+                  <th>Max Participants</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>01.01.2017</td>
+                  <td>01.01.2017</td>
+                  <td>Not required</td>
+                  <td>Not available</td>
+                  <td>No limit</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+          </div>
+
+  		  </div>
+
+        <div data-role="footer" data-position="fixed" align="center">
+            <a href="#" class="buttonToolbar">
+              <img src="img/icons/calendarIconWhite.png">
+            </a>
+            <a href="#" class="buttonToolbar">
+              <img src="img/icons/navigateIcon.png">
+            </a>
+            <a href="#" class="buttonToolbar">
+              <img src="img/icons/shareIcon.png">
+            </a>
+            <a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="buttonToolbar">
+              <img src="img/icons/addIcon.png">
+            </a>
+            <div data-role="popup" id="popupDialog" data-overlay-theme="c" data-theme="b" data-dismissible="false">
+                <div data-role="header" data-theme="c">
+                <h1>Sign in to this event ?</h1>
+                </div>
+                <div >
+                    <h3 class="ui-title popupHeader">Are you sure you want sing in to this event ?</h3>
+                    <a href="#" class="ui-btn " data-rel="back" data-transition="flow" onclick="signIntoEvent">Yes, definitly</a>
+                    <a href="#" class="ui-btn " data-rel="back">Cancel</a>
+                </div>
+            </div>
+        </div>
+  		</div>
 
 
 
