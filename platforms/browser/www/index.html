@@ -3,21 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: *'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: * 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
         <title>EventGuide</title>
         <script type="text/javascript" src="cordova.js"></script>
-        <!-- <link rel="stylesheet" href="css/style.css"/> -->
-
-        <!-- <link href="flatui/dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-        <link href="flatui/dist/css/flat-ui.css" rel="stylesheet">
-
-        <link rel="shortcut icon" href="../../dist/img/favicon.ico"> -->
-
         <link rel="stylesheet" type="text/css" href="jquery/jquery.mobile-1.4.5.css" />
         <link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/customStyle.css"/>
         <link rel="stylesheet" href="css/detailsView.css"/>
+        <link rel="stylesheet" href="css/accountView.css"/>
 
 
     		<script src="jquery/jquery-2.1.4.min.js"></script>
@@ -34,8 +27,8 @@
       <div data-role="page" id="login">
 
         <div data-role="header" data-position="fixed">
-  			     <h1><img border="0" src="img/EventGuideLogoSmall.png" style="float:left;display:inline" class="center"/></h1>
-  		  </div>
+             <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
+        </div>
 
   		  <div data-role="main" class="ui-content">
 
@@ -43,7 +36,7 @@
             <form name="login" id = "loginForm" class="loginForm">
 
               <label for="email">Email</label>
-              <input type="text" name="email" id="email" placeholder="Podaj adres email"/>
+              <input type="email" name="email" id="email" placeholder="Podaj adres email"/>
 
               <label for="password">Hasło</label>
               <input type="password" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"/>
@@ -51,7 +44,7 @@
               <button onclick="validateLogin()" data-role="button" data-transition="slide" data-theme="c" class="ui-btn-hidden">Zaloguj</button>
 
               <label id="topPadding">Nie posiadasz konta ?</label>
-              <a href="#register" data-role="button" data-theme="c" class="ui-btn-hidden" data-transition="slideup">Zarejestruj</a>
+              <a data-role="button" data-theme="c" class="ui-btn-hidden" data-transition="slideup" href="#register">Zarejestruj</a>
             </form>
 
           </div>
@@ -64,7 +57,7 @@
       <div data-role="page" id="register">
 
         <div data-role="header" data-position="fixed">
-             <h1><img border="0" src="img/EventGuideLogoSmall.png" style="float:left;display:inline" class="center"/></h1>
+             <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
         </div>
 
   		  <div data-role="main" class="ui-content">
@@ -81,7 +74,7 @@
               <br>
               <button onclick="validateRegister()" data-role="button" data-theme="c" class="ui-btn-hidden">Register</button>
               <br>
-              <a data-rel="back" data-role="button" data-theme="c" class="ui-btn-hidden">Cancel</a>
+              <a data-role="button" data-theme="c" class="ui-btn-hidden" data-rel="back">Cancel</a>
             </form>
 
           </div>
@@ -91,13 +84,11 @@
   		</div>
 
 
-
       <div data-role="page" id="listPage">
 
         <div data-role="header" data-position="fixed">
-               <!-- <a href="#settings" data-icon="user" data-role="button" class="ui-btn-left" data-iconpos="notext"/></a> -->
              <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
-              <a href="#settings" class="ui-btn-right buttonHeader" data-iconpos="notext"/><img src="img/icons/userIcon.png"></a>
+              <a href="#settings" class="ui-btn-right buttonHeader" data-transition="slide" data-iconpos="notext"/><img src="img/icons/userIcon.png"></a>
         </div>
 
   		  <div data-role="main" class="ui-content">
@@ -108,7 +99,7 @@
 
             <ul data-role="listview" data-filter="true" data-input="#filterBasic-input">
               <li class="listItem">
-                <a id="eventListItem" href="#detailPage" data-transition="slide">
+                <a id="eventListItem" data-transition="slide" href="#detailPage">
                   <img src="testImage/testImage.gif">
                   <div class="listTitle">TEST</div>
                   <div class="listDesc">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</div>
@@ -117,7 +108,7 @@
                 </a>
               </li>
               <li class="listItem">
-                <a id="eventListItem" href="#">
+                <a id="eventListItem" href="#detailPage" transition="slide">
                   <img src="testImage/testImage.gif">
                   <div class="listTitle">TEST</div>
                   <div class="listDesc">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</div>
@@ -159,8 +150,15 @@
       <div data-role="page" id="detailPage">
 
   		  <div data-role="header" data-position="fixed">
-              <!-- <a href="#settings" data-icon="user" data-role="button" class="ui-btn-left" data-iconpos="notext"/></a> -->
-  			     <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
+                  <a data-role="button" data-rel="back" class="buttonHeader">
+                      <img src="img/icons/backButtonIcon.png">
+                  </a>
+
+                  <!-- <a data-direction="reverse" href="#listPage" class="buttonHeader">
+                      <img src="img/icons/backButtonIcon.png">
+                  </a> -->
+
+              <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
   		  </div>
 
   		  <div data-role="main" class="ui-content">
@@ -173,29 +171,32 @@
 
           <div class="eventTable">
 
-            <table data-role="table" class="ui-responsive">
-              <thead>
-                <tr>
-                  <th>Event ID</th>
-                  <th>Event Start Date</th>
-                  <th>Event End Date</th>
-                  <th>Tickets</th>
-                  <th>Card Payment</th>
-                  <th>Max Participants</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>01.01.2017</td>
-                  <td>01.01.2017</td>
-                  <td>Not required</td>
-                  <td>Not available</td>
-                  <td>No limit</td>
-                </tr>
-              </tbody>
+            <table class="eventTableStyle">
+              <tr>
+                <th>Event ID:</th>
+                <td>1</td>
+              </tr>
+              <tr>
+                <th>Event Start Date:</th>
+                <td>01.01.2017</td>
+              </tr>
+              <tr>
+                <th>Event End Date:</th>
+                <td>01.01.2017</td>
+              </tr>
+              <tr>
+                <th>Tickets:</th>
+                <td>Not required</td>
+              </tr>
+              <tr>
+                <th>Card Payment:</th>
+                <td>Not available</td>
+              </tr>
+              <tr>
+                <th>Max Participants:</th>
+                <td>No limit</td>
+              </tr>
             </table>
-
 
           </div>
 
@@ -203,13 +204,16 @@
 
         <div data-role="footer" data-position="fixed" align="center">
             <a href="#" class="buttonToolbar">
-              <img src="img/icons/calendarIconWhite.png">
+              <img src="img/icons/websiteIcon.png">
             </a>
             <a href="#" class="buttonToolbar">
               <img src="img/icons/navigateIcon.png">
             </a>
             <a href="#" class="buttonToolbar">
               <img src="img/icons/shareIcon.png">
+            </a>
+            <a href="#" class="buttonToolbar">
+              <img src="img/icons/calendarIconWhite.png">
             </a>
             <a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="buttonToolbar">
               <img src="img/icons/addIcon.png">
@@ -228,23 +232,76 @@
   		</div>
 
 
-
-
-
       <div data-role="page" id="settings">
 
-  		  <div data-role="header">
-          <a data-rel="back">Back</a>
-  			     <h1>EventGuide</h1>
+        <div data-role="header" data-position="fixed">
+              <a data-role="button" data-rel="back" transition="slide" reverse="false" class="buttonHeader">
+                  <img src="img/icons/backButtonIcon.png">
+              </a>
+              <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
   		  </div>
 
   		  <div data-role="main" class="ui-content">
 
+          <div class="eventTable">
+            <table class="eventTableStyle">
+              <tr>
+                <th>Email:</th>
+                <td>user@email.com</td>
+              </tr>
+
+            </table>
+          </div>
+
+          <div class="userHeader">User's Events</div>
+
+            <ul data-role="listview">
+              <li class="listItem">
+                <a id="eventListItem" href="#detailPage" data-transition="slide">
+                  <img src="testImage/testImage.gif">
+                  <div class="listTitle">TEST</div>
+                  <div class="listDesc">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</div>
+                  <div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">10.10.2017</div>
+                  <div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">1000</div>
+                </a>
+              </li>
+              <li class="listItem">
+                <a id="eventListItem" href="#">
+                  <img src="testImage/testImage.gif">
+                  <div class="listTitle">TEST</div>
+                  <div class="listDesc">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</div>
+                  <div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">10.10.2017</div>
+                  <div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">1000</div>
+                </a>
+              </li>
+              <li class="listItem">
+                <a id="eventListItem" href="#">
+                  <img src="testImage/testImage.gif">
+                  <div class="listTitle">TEST</div>
+                  <div class="listDesc">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</div>
+                  <div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">10.10.2017</div>
+                  <div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">1000</div>
+                </a>
+              </li>
+              <li class="listItem">
+                <a id="eventListItem" href="#">
+                  <img src="testImage/testImage.gif">
+                  <div class="listTitle">TEST</div>
+                  <div class="listDesc">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</div>
+                  <div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">10.10.2017</div>
+                  <div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">1000</div>
+                </a>
+              </li>
+            </ul>
+
   		  </div>
 
-          <div data-role="footer" data-position="fixed" align="center">
-              <a href="#login" data-role="button" data-icon="power">Wyloguj</a>
-          </div>
+        <div data-role="footer" data-position="fixed" align="center">
+          <a href="#login" class="buttonToolbar">
+            <img src="img/icons/logoutIcon.png">
+          </a>
+        </div>
+
   		</div>
 
     </body>

@@ -1,8 +1,8 @@
 
-body {
-  font-family: "Open Sans";
+/*body {
+  font-family: "Ostrich";
   font-size: 14px;
-}
+}*/
 
 .container {
   /*margin: 100px auto;*/
@@ -14,7 +14,7 @@ body {
 
 @headerFont {
     font-family: "Ostrich";
-    src: url("fonts/ostrich-sans-light.ttf");
+    src: url("../fonts/ostrich-sans-light.ttf");
 }
 
 .ui-page .ui-footer {

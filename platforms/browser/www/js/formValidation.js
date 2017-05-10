@@ -12,15 +12,17 @@ function validateLogin() {
     },
 
     messages: {
-      email: "Podaj email na którym założone zostało konto",
+      email: "Input email",
       password: {
-        required: "Podaj hasło",
-        minlength: "Hasło posiadać musi minimum 5 znaków"
+        required: "Input password",
+        minlength: "Password must contain at least 5 characters"
       },
     },
 
     submitHandler: function(form) {
 
+
+      $.mobile.pageContainer.pagecontainer('change', '#listPage', {reverse: false, changeHash: true, transition: 'slide'});
       var values = {};
       $.each($('#loginForm').serializeArray(), function(i, field) {
           values[field.name] = field.value;
@@ -42,7 +44,7 @@ function validateLogin() {
           else {
             console.log("ok");
             // $(':mobile-pagecontainer').pagecontainer('change', '#listPage', { transition: 'slide', reverse: true });
-            $.mobile.changePage('#listPage', { transition: 'slide', reverse: false });
+            // $.mobile.changePage('#listPage', { transition: 'slide', reverse: false });
           }
         } else {
             // navigator.notification.alert("błąd", onConfirm, ["ok"], ["ok"])
@@ -79,10 +81,10 @@ function validateRegister() {
     },
 
     messages: {
-      email: "Podaj login",
+      email: "Provide email",
       password: {
-        required: "Podaj hasło",
-        minlength: "Hasło posiadać musi minimum 5 znaków"
+        required: "Provide password",
+        minlength: "Password must contain at least 5 characters"
       },
     },
 
