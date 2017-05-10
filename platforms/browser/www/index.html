@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: *'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
         <title>EventGuide</title>
         <script type="text/javascript" src="cordova.js"></script>
         <!-- <link rel="stylesheet" href="css/style.css"/> -->
@@ -94,11 +94,11 @@
 
       <div data-role="page" id="listPage">
 
-  		  <div data-role="header" data-position="fixed">
-              <!-- <a href="#settings" data-icon="user" data-role="button" class="ui-btn-left" data-iconpos="notext"/></a> -->
-  			     <h1><img border="0" src="img/EventGuideLogoSmall.png" style="float:left;display:inline" class="center"/></h1>
-             <a href="#settings" class="ui-btn-right buttonHeader" data-iconpos="notext"/><img src="img/icons/userIcon.png"></a>
-  		  </div>
+        <div data-role="header" data-position="fixed">
+               <!-- <a href="#settings" data-icon="user" data-role="button" class="ui-btn-left" data-iconpos="notext"/></a> -->
+             <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
+              <a href="#settings" class="ui-btn-right buttonHeader" data-iconpos="notext"/><img src="img/icons/userIcon.png"></a>
+        </div>
 
   		  <div data-role="main" class="ui-content">
 
@@ -152,31 +152,8 @@
             <a class="buttonToolbar" onclick="scan()" href="#">
               <img src="img/icons/qrIcon.png">
             </a>
-
-            <button onclick="scan()" data-role="button" data-theme="c">testbutton</button>
-            <!-- <a href="#settings" class="ui-btn-right buttonHeader" data-iconpos="notext" height="15px"/><img src="img/icons/userIcon.png"></a> -->
         </div>
   		</div>
-
-      <div data-role="page" id="display">
-    <div data-role="header">
-        <a target="_blank" href="#home" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
-        <h1>Display</h1>
-    </div>
-
-    <div data-role="main" class="ui-content">
-        <table data-role="table" data-mode="column" id="allTable" class="ui-responsive table-stroke">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-</div>
 
 
       <div data-role="page" id="detailPage">
@@ -184,7 +161,6 @@
   		  <div data-role="header" data-position="fixed">
               <!-- <a href="#settings" data-icon="user" data-role="button" class="ui-btn-left" data-iconpos="notext"/></a> -->
   			     <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
-             <a href="#settings" class="ui-btn-right buttonHeader" data-iconpos="notext"/><img src="img/icons/userIcon.png"></a>
   		  </div>
 
   		  <div data-role="main" class="ui-content">
