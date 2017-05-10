@@ -21,8 +21,10 @@ function validateLogin() {
 
     submitHandler: function(form) {
 
-
-      $.mobile.pageContainer.pagecontainer('change', '#listPage', {reverse: false, changeHash: true, transition: 'slide'});
+      $(document).ajaxStart(function() {
+          $.mobile.loading('show');
+      });
+      // $.mobile.pageContainer.pagecontainer('change', '#listPage', {reverse: false, changeHash: true, transition: 'slide'});
       var values = {};
       $.each($('#loginForm').serializeArray(), function(i, field) {
           values[field.name] = field.value;
@@ -40,14 +42,18 @@ function validateLogin() {
           if (data.error === true)
           {
             console.log( data.error );
+            $(document).ajaxStop(function() {
+                $.mobile.loading('hide');
+            });
           }
           else {
             console.log("ok");
-            // $(':mobile-pagecontainer').pagecontainer('change', '#listPage', { transition: 'slide', reverse: true });
-            // $.mobile.changePage('#listPage', { transition: 'slide', reverse: false });
+            $(document).ajaxStop(function() {
+                $.mobile.loading('hide');
+            });
+            $.mobile.pageContainer.pagecontainer('change', '#listPage', {reverse: false, changeHash: true, transition: 'slide'});
           }
         } else {
-            // navigator.notification.alert("błąd", onConfirm, ["ok"], ["ok"])
             console.log("błąd połączenia");
         }
         },'json');
@@ -91,9 +97,55 @@ function validateRegister() {
     submitHandler: function(form) {
 
       // $(':mobile-pagecontainer').pagecontainer('change', '#listPage');
-      $.mobile.changePage('#listPage', { transition: 'slide', reverse: false });
+      // $.mobile.changePage('#listPage', { transition: 'slide', reverse: false });
+
+      $(document).ajaxStart(function() {
+          $.mobile.loading('show');
+      });
+      // $.mobile.pageContainer.pagecontainer('change', '#listPage', {reverse: false, changeHash: true, transition: 'slide'});
+      var values = {};
+      $.each($('#registerForm').serializeArray(), function(i, field) {
+          values[field.name] = field.value;
+      });
+
+      // navigator.notification.activityStart("Please Wait", "Its loading.....");
+      var postTo = 'http://kartwal.ayz.pl/EventGuide_API/v1/index.php/register';
+
+
+    $.post(postTo,({email: values["email"], password: values["password"], login: "login"}),
+    function(data) {
+
+      console.log( data.error );
+        if(data != "") {
+          if (data.error === true)
+          {
+            console.log( data.error );
+            $(document).ajaxStop(function() {
+                $.mobile.loading('hide');
+                $('#popupRegisterFail').popup('open');
+            });
+          }
+          else {
+            console.log("ok");
+            $(document).ajaxStop(function() {
+                $.mobile.loading('hide');
+            });
+            $('#popupRegisterOk').popup('open');
+          }
+        } else {
+            console.log("błąd połączenia");
+        }
+        },'json');
+        return false;
+
     }
+
   });
+}
+
+function closeRegisterPopup()
+{
+  $('#popupRegister').popup('close');
 }
 
 function scan()

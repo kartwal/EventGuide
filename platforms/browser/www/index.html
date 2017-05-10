@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: * 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: * 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
         <title>EventGuide</title>
         <script type="text/javascript" src="cordova.js"></script>
         <link rel="stylesheet" type="text/css" href="jquery/jquery.mobile-1.4.5.css" />
@@ -74,12 +74,42 @@
               <br>
               <button onclick="validateRegister()" data-role="button" data-theme="c" class="ui-btn-hidden">Register</button>
               <br>
-              <a data-role="button" data-theme="c" class="ui-btn-hidden" data-rel="back">Cancel</a>
+              <a data-role="button" data-theme="c" class="ui-btn-hidden" data-rel="back">Back</a>
             </form>
 
           </div>
 
   		  </div>
+
+        <div data-role="popup" id="popupRegisterOk" data-overlay-theme="c" data-theme="b" data-dismissible="false">
+            <div data-role="header" data-theme="c">
+            <h1>Success</h1>
+            </div>
+            <div >
+                <h3 class="ui-title popupHeader">Now you can log in!</h3>
+                <a href="#" class="ui-btn " data-rel="back">OK</a>
+            </div>
+        </div>
+
+        <div data-role="popup" id="popupRegisterFail" data-overlay-theme="c" data-theme="b" data-dismissible="false">
+            <div data-role="header" data-theme="c">
+            <h1>Error</h1>
+            </div>
+            <div >
+                <h3 class="ui-title popupHeader">Registration error - try change data</h3>
+                <a href="#" class="ui-btn " data-rel="back">OK</a>
+            </div>
+        </div>
+
+        <!-- <div data-role="popup" id="popupRegister" data-theme="a" class="ui-corner-all">
+            <h3 class="centerText">Register Complete!</h3>
+            <div class="popup">
+                      <p class="centerText">
+                          You can now login!
+                      </p>
+            </div>
+            <button data-theme="b" onclick="closeRegisterPopup()" data-role="button">Ok</button>
+        </div> -->
 
   		</div>
 
@@ -107,7 +137,7 @@
                   <div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">1000</div>
                 </a>
               </li>
-              
+
             </ul>
 
 
