@@ -98,34 +98,24 @@ function scan()
 {
   console.log("Starting scanning");
 
-  // cordova.plugins.barcodeScanner.scan(
-  //        function (result) {
-  //             if(!result.cancelled){
-  //                    // In this case we only want to process QR Codes
-  //                    if(result.format == "QR_CODE"){
-  //                         var value = result.text;
-  //                         // This is the retrieved content of the qr code
-  //                         console.log(value);
-  //                    }else{
-  //                       alert("Sorry, only qr codes this time ;)");
-  //                    }
-  //             }else{
-  //               alert("The user has dismissed the scan");
-  //             }
-  //          },
-  //          function (error) {
-  //               alert("An error ocurred: " + error);
-  //          }
-  //       );
   cordova.plugins.barcodeScanner.scan(
-      function (result) {
-          alert("A barcode has been scanned \n" +
-                "Result: " + result.text + "\n" +
-                "Format: " + result.format + "\n" +
-                "Cancelled: " + result.cancelled);
-      },
-      function (error) {
-          alert("Scanning failed: " + error);
-      }
- );
+         function (result) {
+              if(!result.cancelled){
+                     // In this case we only want to process QR Codes
+                     if(result.format == "QR_CODE"){
+                          var value = result.text;
+                          // This is the retrieved content of the qr code
+                          console.log(value);
+                     }else{
+                        alert("Sorry, only qr codes this time ;)");
+                     }
+              }else{
+                alert("The user has dismissed the scan");
+              }
+           },
+           function (error) {
+                alert("An error ocurred: " + error);
+           }
+        );
+
 }
