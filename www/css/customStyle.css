@@ -65,6 +65,11 @@ div.ui-input-search {
   margin-right: -10px;
 }
 
+#listDiv
+{
+  display:none;
+}
+
 .listItem{
   height: 80px;
   background: white

@@ -145,12 +145,26 @@ function loginInto(userEmail, userPassword)
         });
 
 }
-$(document).on('pageshow', "#listPage",function(){
+$(document).on('pageinit', "#listPage",function(){
 
-  console.log('pageinit');
-
+  showActivityIndicator("Downloading content...");
+  downloadEventsList();
+  $('#listDiv').show();
+  hideActivityIndicator();
 
 });
+
+function showActivityIndicator(popupMessage)
+{
+    $.mobile.loading( 'show', {text : popupMessage, textVisible : true});
+}
+
+function hideActivityIndicator()
+{
+    $.mobile.loading( 'hide');
+}
+
+
 
 function downloadEventsList()
 {
@@ -159,9 +173,19 @@ function downloadEventsList()
             url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/getEventsList",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            headers: { 'Authorization': userLoginData["apiKey"] },
-            success: function (msg) {
-               console.log(msg);
+            headers: { 'Authorization': "7194581c02ab6087e7da5881be984fe0" },
+            success: function (response) {
+              if (response["error"] == true)
+              {
+                console.log(response["message"]);
+              }
+              else {
+                for(var i = 0; i < response["events"].length; i += 1)
+                {
+                   $('#eventsList').append('<li class="listItem"><a id="eventListItem" data-transition="slide" href="#detailPage"><img src="testImage/testImage.gif"><div class="listTitle">' + response["events"][i]["event_title"] + '</div>' + '<div class="listDesc">' + response["events"][i]["event_description_short"] + '</div>' + '<div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">' + response["events"][i]["event_start_date"] + '</div>' + '<div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">' + response["events"][i]["participants"] + '</div>'+ '</div></a></li>').listview('refresh');
+                }
+
+              }
             },
             error: function (errormessage) {
                 console.log(errormessage);

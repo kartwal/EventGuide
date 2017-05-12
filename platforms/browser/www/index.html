@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-      
+
         <title>EventGuide</title>
         <script type="text/javascript" src="cordova.js"></script>
         <link rel="stylesheet" type="text/css" href="jquery/jquery.mobile-1.4.5.css" />
@@ -120,25 +120,16 @@
         </div>
 
   		  <div data-role="main" class="ui-content">
-
+          <div id="listDiv">
           <form class="ui-filterable">
               <input id="filterBasic-input" data-type="search" data-inline="true" class="searchForm" placeholder="Search Event...">
           </form>
 
-            <ul data-role="listview" data-filter="true" data-input="#filterBasic-input">
-              <li class="listItem">
-                <a id="eventListItem" data-transition="slide" href="#detailPage">
-                  <img src="testImage/testImage.gif">
-                  <div class="listTitle">TEST</div>
-                  <div class="listDesc">Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki.</div>
-                  <div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">10.10.2017</div>
-                  <div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">1000</div>
-                </a>
-              </li>
-
+            <ul data-role="listview" data-filter="true" data-input="#filterBasic-input" id="eventsList">
+              <!-- content from downloadEventsList goes here -->
             </ul>
 
-
+          </div>
   		  </div>
 
         <div data-role="footer" data-position="fixed" align="center">
