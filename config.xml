@@ -19,4 +19,9 @@
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
 
+    <plugin name="cordova-plugin-whitelist"/>
+
+	  <access origin="*"/>
+
+
 </widget>
