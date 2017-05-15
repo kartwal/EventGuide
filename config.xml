@@ -14,6 +14,7 @@
     <plugin name="cordova-plugin-statusbar"/>
     <plugin name="phonegap-plugin-barcodescanner"/>
     <plugin name="cordova-plugin-console"/>
+    <plugin name="cordova-plugin-file-transfer" />
 
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />

@@ -154,6 +154,11 @@ $(document).on('pageinit', "#listPage",function(){
 
 });
 
+$(document).on('pagebeforehide', "#detailPage", function(){
+  $('#detailsContent').empty();
+
+});
+
 function showActivityIndicator(popupMessage)
 {
     $.mobile.loading( 'show', {text : popupMessage, textVisible : true});
@@ -162,6 +167,14 @@ function showActivityIndicator(popupMessage)
 function hideActivityIndicator()
 {
     $.mobile.loading( 'hide');
+}
+
+function goToEventDetails(eventDetailsID)
+{
+    $.mobile.pageContainer.pagecontainer('change', '#detailPage', {reverse: false, changeHash: true, transition: 'slide'});
+    showActivityIndicator("Downloading event details...");
+    downloadEventDetails(eventDetailsID);
+    hideActivityIndicator();
 }
 
 
@@ -182,7 +195,7 @@ function downloadEventsList()
               else {
                 for(var i = 0; i < response["events"].length; i += 1)
                 {
-                   $('#eventsList').append('<li class="listItem"><a id="eventListItem" data-transition="slide" href="#detailPage"><img src="testImage/testImage.gif"><div class="listTitle">' + response["events"][i]["event_title"] + '</div>' + '<div class="listDesc">' + response["events"][i]["event_description_short"] + '</div>' + '<div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">' + response["events"][i]["event_start_date"] + '</div>' + '<div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">' + response["events"][i]["participants"] + '</div>'+ '</div></a></li>').listview('refresh');
+                   $('#eventsList').append('<li class="listItem"><a id="eventListItem" onclick="goToEventDetails(' + response["events"][i]["event_id"] + ')"><img src=' + response["events"][i]["event_image"] + '><div class="listTitle">' + response["events"][i]["event_title"] + '</div>' + '<div class="listDesc">' + response["events"][i]["event_description_short"] + '</div>' + '<div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">' + response["events"][i]["event_start_date"] + '</div>' + '<div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">' + response["events"][i]["participants"] + '</div>'+ '</div></a></li>').listview('refresh');
                 }
 
               }
@@ -204,8 +217,27 @@ function downloadEventDetails(detailsID)
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             headers: { 'Authorization': '7194581c02ab6087e7da5881be984fe0' },
-            success: function (msg) {
-               console.log(msg);
+            success: function (response) {
+              if (response["error"] == true)
+              {
+                console.log(response["message"]);
+              }
+              else
+              {
+                console.log(response["event_title"]);
+
+                $('#detailsContent').append('<div><img class="eventImage" src=' + response["event_image"] + '></div><div class="eventTitle">' + response["event_title"] + '</div><div class="eventDescription">' + response["event_description"] + '</div>');
+                var tempString = '';
+                $.each(response, function (index, itemData) {
+                  if (index != "error" && index != "event_title" && index != "event_image" && index != "event_description" && index != "event_description_short" && index != "event_accepted" && index != "QR Code")
+                  {
+                    tempString += '<tr><th>' + index + '</th><td>' + itemData + '</td></tr></div';
+                  }
+                });
+                tempString += '</table></div>';
+                $('#detailsContent').append('<div class="eventTable"><table class="eventTableStyle">' + tempString);
+                $('#detailsContent').append('<div><img class="eventImage" id="QRcode" src=' + response["QR Code"] + '></div>');
+              }
             },
             error: function (errormessage) {
                 console.log("elo");
@@ -227,16 +259,17 @@ function scan()
   cordova.plugins.barcodeScanner.scan(
          function (result) {
               if(!result.cancelled){
-                     // In this case we only want to process QR Codes
                      if(result.format == "QR_CODE"){
-                          var value = result.text;
-                          // This is the retrieved content of the qr code
-                          console.log(value);
+                          $.mobile.pageContainer.pagecontainer('change', '#detailPage', {reverse: false, changeHash: true, transition: 'slide'});
+                          showActivityIndicator("Downloading event details...");
+                          downloadEventDetails(value);
+                          hideActivityIndicator();
+
                      }else{
-                        alert("Sorry, only qr codes this time ;)");
+                        alert("Sorry, only qr codes are supported");
                      }
               }else{
-                alert("The user has dismissed the scan");
+                //scan was dismissed by user
               }
            },
            function (error) {

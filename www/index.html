@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline';img-src *; style-src * 'self' 'unsafe-inline'; media-src *" />
         <title>EventGuide</title>
         <script type="text/javascript" src="cordova.js"></script>
         <link rel="stylesheet" type="text/css" href="jquery/jquery.mobile-1.4.5.css" />
@@ -150,44 +150,10 @@
   		  </div>
 
   		  <div data-role="main" class="ui-content">
-          <div><img class="eventImage" src="testImage/testImage.gif"></div>
-          <div class="eventTitle">Event Title</div>
-          <div class="eventDescription">
-              Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker. Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker
+          <div id="detailsContent">
+
+              <!-- content goes here -->
           </div>
-
-
-          <div class="eventTable">
-
-            <table class="eventTableStyle">
-              <tr>
-                <th>Event ID:</th>
-                <td>1</td>
-              </tr>
-              <tr>
-                <th>Event Start Date:</th>
-                <td>01.01.2017</td>
-              </tr>
-              <tr>
-                <th>Event End Date:</th>
-                <td>01.01.2017</td>
-              </tr>
-              <tr>
-                <th>Tickets:</th>
-                <td>Not required</td>
-              </tr>
-              <tr>
-                <th>Card Payment:</th>
-                <td>Not available</td>
-              </tr>
-              <tr>
-                <th>Max Participants:</th>
-                <td>No limit</td>
-              </tr>
-            </table>
-
-          </div>
-
   		  </div>
 
         <div data-role="footer" data-position="fixed" align="center">
