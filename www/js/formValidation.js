@@ -122,36 +122,6 @@ function registerAccount(userEmail, userPassword)
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             data: jQuery.param({email: userEmail, password: userPassword}),
             success: function (response) {
-              // if (response["error"] == true) {
-              //   console.log(response["message"]);
-              // }
-              // else {
-              //
-              //   console.log(response);
-              //   userCredentialsData = response;
-              //   hideActivityIndicator();
-              //   $.mobile.pageContainer.pagecontainer('change', '#listPage', {reverse: false, changeHash: true, transition: 'slide'});
-              // }
-              // console.log( data.error );
-              //     if(data != "") {
-              //       if (data.error === true)
-              //       {
-              //         console.log( data.error );
-              //         $(document).ajaxStop(function() {
-              //             $.mobile.loading('hide');
-              //             $('#popupRegisterFail').popup('open');
-              //         });
-              //       }
-              //       else {
-              //         console.log("ok");
-              //         $(document).ajaxStop(function() {
-              //             $.mobile.loading('hide');
-              //         });
-              //         $('#popupRegisterOk').popup('open');
-              //       }
-              //     } else {
-              //         console.log("błąd połączenia");
-              //     }
               if (response["error"] == true)
               {
                 console.log(response["error"]);
@@ -192,9 +162,12 @@ $(document).on('pagebeforehide', "#detailPage", function(){
 
 function navigateToEventPlace()
 {
-  console.log("Nawiguje");
-
   launchnavigator.navigate([eventDetails["Event Latitude"], eventDetails["Event Longitude"]]);
+}
+
+function goToEventWebsite()
+{
+  window.open('https://www.eslgaming.com', '_blank', 'location=no,hidden=yes,closebuttoncaption=Done,toolbar=no');
 }
 
 function createEventInCalendar()
