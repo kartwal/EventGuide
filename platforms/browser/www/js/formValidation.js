@@ -1,4 +1,5 @@
 var userCredentialsData = {};
+var eventDetails = {};
 
 
 function validateLogin() {
@@ -24,16 +25,10 @@ function validateLogin() {
 
     submitHandler: function(form) {
 
-      // $(document).ajaxStart(function() {
-      //     $.mobile.loading('show');
-      // });
-
       var values = {};
       $.each($('#loginForm').serializeArray(), function(i, field) {
           values[field.name] = field.value;
       });
-
-      console.log("Starting...");
 
       loginInto(values["email"], values["password"]);
 
@@ -66,47 +61,14 @@ function validateRegister() {
 
     submitHandler: function(form) {
 
-      // $(':mobile-pagecontainer').pagecontainer('change', '#listPage');
-      // $.mobile.changePage('#listPage', { transition: 'slide', reverse: false });
-
-      $(document).ajaxStart(function() {
-          $.mobile.loading('show');
-      });
-      // $.mobile.pageContainer.pagecontainer('change', '#listPage', {reverse: false, changeHash: true, transition: 'slide'});
       var values = {};
       $.each($('#registerForm').serializeArray(), function(i, field) {
           values[field.name] = field.value;
       });
 
-      // navigator.notification.activityStart("Please Wait", "Its loading.....");
-      var postTo = 'http://kartwal.ayz.pl/EventGuide_API/v1/index.php/register';
+      registerAccount(values["email"], values["password"]);
 
-
-    $.post(postTo,({email: values["email"], password: values["password"], login: "login"}),
-    function(data) {
-
-      console.log( data.error );
-        if(data != "") {
-          if (data.error === true)
-          {
-            console.log( data.error );
-            $(document).ajaxStop(function() {
-                $.mobile.loading('hide');
-                $('#popupRegisterFail').popup('open');
-            });
-          }
-          else {
-            console.log("ok");
-            $(document).ajaxStop(function() {
-                $.mobile.loading('hide');
-            });
-            $('#popupRegisterOk').popup('open');
-          }
-        } else {
-            console.log("błąd połączenia");
-        }
-        },'json');
-        return false;
+      return false;
 
     }
 
@@ -120,7 +82,7 @@ function closeRegisterPopup()
 
 function loginInto(userEmail, userPassword)
 {
-  console.log(userEmail, userPassword);
+  showActivityIndicator("Logging in...");
   $.ajax({
             type: "POST",
             url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/login",
@@ -130,20 +92,80 @@ function loginInto(userEmail, userPassword)
             data: jQuery.param({email: userEmail, password: userPassword}),
             success: function (response) {
               if (response["error"] == true) {
+                hideActivityIndicator();
                 console.log(response["message"]);
               }
               else {
 
                 console.log(response);
                 userCredentialsData = response;
+                hideActivityIndicator();
                 $.mobile.pageContainer.pagecontainer('change', '#listPage', {reverse: false, changeHash: true, transition: 'slide'});
+              }
+            },
+            error: function (errormessage) {
+              hideActivityIndicator();
+              alert(errormessage);
+                console.log(errormessage);
+            }
+        });
+}
+
+function registerAccount(userEmail, userPassword)
+{
+  showActivityIndicator("Logging in...");
+  $.ajax({
+            type: "POST",
+            url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/register",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            data: jQuery.param({email: userEmail, password: userPassword}),
+            success: function (response) {
+              // if (response["error"] == true) {
+              //   console.log(response["message"]);
+              // }
+              // else {
+              //
+              //   console.log(response);
+              //   userCredentialsData = response;
+              //   hideActivityIndicator();
+              //   $.mobile.pageContainer.pagecontainer('change', '#listPage', {reverse: false, changeHash: true, transition: 'slide'});
+              // }
+              // console.log( data.error );
+              //     if(data != "") {
+              //       if (data.error === true)
+              //       {
+              //         console.log( data.error );
+              //         $(document).ajaxStop(function() {
+              //             $.mobile.loading('hide');
+              //             $('#popupRegisterFail').popup('open');
+              //         });
+              //       }
+              //       else {
+              //         console.log("ok");
+              //         $(document).ajaxStop(function() {
+              //             $.mobile.loading('hide');
+              //         });
+              //         $('#popupRegisterOk').popup('open');
+              //       }
+              //     } else {
+              //         console.log("błąd połączenia");
+              //     }
+              if (response["error"] == true)
+              {
+                console.log(response["error"]);
+                hideActivityIndicator();
+                $('#popupRegisterFail').popup('open');
+              } else {
+                hideActivityIndicator();
+                $('#popupRegisterOk').popup('open');
               }
             },
             error: function (errormessage) {
                 console.log(errormessage);
             }
         });
-
 }
 $(document).on('pageinit', "#listPage",function(){
 
@@ -172,17 +194,17 @@ function navigateToEventPlace()
 {
   console.log("Nawiguje");
 
-  launchnavigator.navigate("London, UK");
+  launchnavigator.navigate([eventDetails["Event Latitude"], eventDetails["Event Longitude"]]);
 }
 
 function createEventInCalendar()
 {
   console.log("creating event...");
-  var start = new Date(2017,4,26,18,30,0,0,0); // beware: month 0 = january, 11 = december
-  var end = new Date(2017,4,36,19,30,0,0,0);
+  var start = new Date(eventDetails["Event Start Date"]); // beware: month 0 = january, 11 = december
+  var end = new Date(eventDetails["Event End Date"]);
   var success = function(message) { alert("Success: " + JSON.stringify(message)); };
   var error = function(message) { alert("Error: " + message); };
-  window.plugins.calendar.createEvent("test","SO","Short event info",start,end,success,error);
+  window.plugins.calendar.createEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error);
 }
 
 function showActivityIndicator(popupMessage)
@@ -246,8 +268,7 @@ function downloadEventDetails(detailsID)
               }
               else
               {
-                console.log(response["event_title"]);
-
+                eventDetails = response;
                 $('#detailsContent').append('<div><img class="eventImage" src=' + response["event_image"] + '></div><div class="eventTitle">' + response["event_title"] + '</div><div class="eventDescription">' + response["event_description"] + '</div>');
                 var tempString = '';
                 $.each(response, function (index, itemData) {
@@ -296,7 +317,7 @@ function downloadEventDetails(detailsID)
               }
             },
             error: function (errormessage) {
-                console.log("elo");
+                console.log(errormessage);
             }
         });
 
