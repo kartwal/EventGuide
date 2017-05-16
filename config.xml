@@ -15,6 +15,10 @@
     <plugin name="phonegap-plugin-barcodescanner"/>
     <plugin name="cordova-plugin-console"/>
     <plugin name="cordova-plugin-file-transfer" />
+    <plugin name="cordova-plugin-calendar" />
+    <!-- <gap:plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" source="plugins.cordova.io" /> -->
+
+    <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="3" />
 
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />

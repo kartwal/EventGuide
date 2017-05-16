@@ -168,6 +168,23 @@ $(document).on('pagebeforehide', "#detailPage", function(){
 
 });
 
+function navigateToEventPlace()
+{
+  console.log("Nawiguje");
+
+  launchnavigator.navigate("London, UK");
+}
+
+function createEventInCalendar()
+{
+  console.log("creating event...");
+  var start = new Date(2017,4,26,18,30,0,0,0); // beware: month 0 = january, 11 = december
+  var end = new Date(2017,4,36,19,30,0,0,0);
+  var success = function(message) { alert("Success: " + JSON.stringify(message)); };
+  var error = function(message) { alert("Error: " + message); };
+  window.plugins.calendar.createEvent("test","SO","Short event info",start,end,success,error);
+}
+
 function showActivityIndicator(popupMessage)
 {
     $.mobile.loading( 'show', {text : popupMessage, textVisible : true});
@@ -185,8 +202,6 @@ function goToEventDetails(eventDetailsID)
     downloadEventDetails(eventDetailsID);
     hideActivityIndicator();
 }
-
-
 
 function downloadEventsList()
 {
@@ -215,8 +230,6 @@ function downloadEventsList()
         });
 
 }
-
-
 
 function downloadEventDetails(detailsID)
 {
