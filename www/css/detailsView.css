@@ -11,8 +11,9 @@
   margin-top: -15px;
   margin-left: auto;
   margin-right: auto;
-  height: 80px;
+  height: 100px;
   display: block;
+  background: white;
 }
 
 .popupHeader{
@@ -44,6 +45,15 @@
   text-align: left;
   font-weight: lighter !important;
   font-family: "Ostrich";
+}
+
+.eventQRCode{
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 200px;
+  display: block;
+  background: white;
 }
 
 
