@@ -33,15 +33,15 @@
             <form name="login" id = "loginForm" class="loginForm">
 
               <label for="email">Email</label>
-              <input type="email" name="email" id="email" placeholder="Podaj adres email"/>
+              <input type="email" name="email" id="email" placeholder="Email"/>
 
-              <label for="password">Hasło</label>
+              <label for="password">Password</label>
               <input type="password" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"/>
               <br>
-              <button onclick="validateLogin()" data-role="button" data-transition="slide" data-theme="c" class="ui-btn-hidden">Zaloguj</button>
+              <button onclick="validateLogin()" data-role="button" data-transition="slide" data-theme="c" class="ui-btn-hidden">Login</button>
 
-              <label id="topPadding">Nie posiadasz konta ?</label>
-              <a data-role="button" data-theme="c" class="ui-btn-hidden" data-transition="slideup" href="#register">Zarejestruj</a>
+              <label id="topPadding">Dont't have account yet ?</label>
+              <a data-role="button" data-theme="c" class="ui-btn-hidden" data-transition="slideup" href="#register">Register</a>
             </form>
 
           </div>
@@ -65,6 +65,9 @@
 
               <label for="email">Email</label>
               <input type="email" name="email" id="email" placeholder="Email"/>
+
+              <label for="text">Login</label>
+              <input type="text" name="userLogin" id="userLogin" placeholder="Login"/>
 
               <label for="password">Hasło</label>
               <input type="password" name="password" id="password" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"/>
@@ -162,7 +165,7 @@
             <a onclick="navigateToEventPlace()" class="buttonToolbar">
               <img src="img/icons/navigateIcon.png">
             </a>
-            <a href="#" class="buttonToolbar">
+            <a href="#inviteUsers" class="buttonToolbar">
               <img src="img/icons/shareIcon.png">
             </a>
             <a onclick="createEventInCalendar()" class="buttonToolbar">
@@ -173,6 +176,30 @@
             </a>
         </div>
   		</div>
+
+      <div data-role="page" id="inviteUsers">
+
+        <div data-role="header" data-position="fixed">
+              <a data-role="button" data-rel="back" transition="slide" reverse="false" class="buttonHeader">
+                  <img src="img/icons/backButtonIcon.png">
+              </a>
+              <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
+        </div>
+
+        <div data-role="main" class="ui-content">
+
+          <div id="usersSet" data-role="content">
+
+          </div>
+        </div>
+
+        <div data-role="footer" data-position="fixed" align="center">
+          <a onclick="sendInvs()" class="buttonToolbar">
+            <img src="img/icons/tickIcon.png">
+          </a>
+        </div>
+
+      </div>
 
 
       <div data-role="page" id="settings">

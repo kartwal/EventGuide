@@ -18,7 +18,7 @@
     <plugin name="cordova-plugin-calendar" />
     <plugin name="cordova-plugin-inappbrowser" />
     <plugin name="cordova-plugin-pdialog" />
-
+    <plugin name="emailjs" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="3" />
 
     <preference name="StatusBarOverlaysWebView" value="false" />

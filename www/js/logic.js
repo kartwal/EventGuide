@@ -66,7 +66,7 @@ function validateRegister() {
           values[field.name] = field.value;
       });
 
-      registerAccount(values["email"], values["password"]);
+      registerAccount(values["email"], values["password"], values["userLogin"]);
 
       return false;
 
@@ -93,7 +93,7 @@ function loginInto(userEmail, userPassword)
             success: function (response) {
               if (response["error"] == true) {
                 hideActivityIndicator();
-                console.log(response["message"]);
+                alert(response["message"]);
               }
               else {
 
@@ -106,34 +106,36 @@ function loginInto(userEmail, userPassword)
             error: function (errormessage) {
               hideActivityIndicator();
               alert(errormessage);
-                console.log(errormessage);
+              console.log(errormessage);
             }
         });
 }
 
-function registerAccount(userEmail, userPassword)
+function registerAccount(userEmail, userPassword, userLogin)
 {
-  showActivityIndicator("Logging in...");
+  showActivityIndicator("Register is performing...");
+
   $.ajax({
             type: "POST",
             url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/register",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            data: jQuery.param({email: userEmail, password: userPassword}),
+            data: jQuery.param({email: userEmail, password: userPassword, login: userLogin }),
             success: function (response) {
               if (response["error"] == true)
               {
                 console.log(response["error"]);
                 hideActivityIndicator();
-                $('#popupRegisterFail').popup('open');
+                alert(response["message"]);
               } else {
                 hideActivityIndicator();
-                $('#popupRegisterOk').popup('open');
+                alert("Registration complete. Now you can log in.");
               }
             },
             error: function (errormessage) {
-                console.log(errormessage);
+              hideActivityIndicator();
+                alert(errormessage);
             }
         });
 }
@@ -195,17 +197,23 @@ $(document).on('pagecreate', "#settings",function(){
 
 });
 
-$(document).on('pagecreate', "#detailPage",function(){
-
+$(document).on('pagechange', "#detailPage",function(){
+  $('#detailsContent').empty();
+  eventDetails = {};
   showActivityIndicator("Downloading content...");
 
 });
 
+$(document).on('pagecreate', "#inviteUsers",function(){
 
-$(document).on('pagebeforehide', "#detailPage", function(){
+  downloadUsers();
+
+});
+
+$(document).on('pagebeforeshow', "#listPage", function(){
+
   $('#detailsContent').empty();
   eventDetails = {};
-
 });
 
 function navigateToEventPlace()
@@ -277,6 +285,33 @@ function downloadEventsList()
                 {
                    $('#eventsList').append('<li class="listItem"><a id="eventListItem" onclick="goToEventDetails(' + response["events"][i]["event_id"] + ')"><img src=' + response["events"][i]["event_image"] + '><div class="listTitle">' + response["events"][i]["event_title"] + '</div>' + '<div class="listDesc">' + response["events"][i]["event_description_short"] + '</div>' + '<div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">' + response["events"][i]["event_start_date"] + '</div>' + '<div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">' + response["events"][i]["participants"] + '</div>'+ '</div></a></li>').listview('refresh');
                 }
+
+              }
+            },
+            error: function (errormessage) {
+                console.log(errormessage);
+            }
+        });
+
+}
+
+function downloadUsers()
+{
+  showActivityIndicator("Downloading users list...");
+  $.ajax({
+            type: "GET",
+            url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/getAllUsers",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            headers: { 'Authorization': "7194581c02ab6087e7da5881be984fe0" },
+            success: function (response) {
+              if (response["error"] == true)
+              {
+                console.log(response["message"]);
+              }
+              else {
+
+                createCheckboxes(response["users"]);
 
               }
             },
@@ -422,4 +457,25 @@ function scan()
            }
         );
 
+}
+
+function createCheckboxes(usersArray){
+         var array = [{ name: "John", value: "1"}, { name: "Alex", value: "2"},{ name: "John2", value: "3"}, { name: "Alex2", value: "4"}];
+         var length = usersArray.length;
+
+          $("#usersSet").append('<fieldset id="usersFieldSet" data-role="controlgroup">');
+         for(var i=0;i<length;i++){
+            $("#usersFieldSet").append('<input type="checkbox" name="'+ usersArray[i]["user_id"] +'" id="' + i +'" value="'+ usersArray[i]["user_email"] + '"/><label for="'+ i + '">' + usersArray[i]["user_login"] +'</label>');
+         }
+         $("#usersFieldSet").trigger("create");
+
+}
+
+function sendInvs(){
+    var count = $("#usersFieldSet input:checked").length;
+    var str = '';
+    for(i=0;i<count;i++){
+        str += ' '+$("#usersFieldSet input:checked")[i].value;
+    }
+    alert("You selected----"+str);
 }
