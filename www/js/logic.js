@@ -508,12 +508,11 @@ function sendInvs(){
                 cordova.plugins.email.open({ app:app }, showToast);
             };
 
-    cordova.plugins.email.open({
-                    to: 'to@email.de',
-                    cc: [str],
-                    bcc: ['bcc1@email.de', 'bcc2@email.de'],
-                    subject: isHtml ? 'Body with HTML and CSS3' : 'Body with plain text',
-                    body: getBody(isHtml),
-                    isHTML: isHtml
-                }, alert("ok"));
+            cordova.plugins.email.open({
+                to:      'max@mustermann.de',
+                cc:      'erika@mustermann.de',
+                bcc:     ['john@doe.com', 'jane@doe.com'],
+                subject: 'Greetings',
+                body:    'How are you? Nice greetings from Leipzig'
+            });
 }
