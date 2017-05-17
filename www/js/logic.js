@@ -498,7 +498,7 @@ function sendInvs(){
     cordova.plugins.email.isAvailable(
 
         function (isAvailable) {
-            alert('Before proceeding check your mail settings ...') ;
+            alert('Before proceeding check your mail settings ...' + isAvailable);
         }
     );
 
