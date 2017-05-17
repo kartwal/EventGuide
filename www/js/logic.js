@@ -222,34 +222,23 @@ function createEventInCalendar()
 {
   var start = new Date(eventDetails["Event Start Date"]);
   var end = new Date(eventDetails["Event End Date"]);
-  var addingComplete = function(message) {alert("Adding into your calendar is complete")};
-  var addingError = function(message) {alert(message)};
+
+  var addingComplete = function(message) {alert("Adding into your calendar is complete");};
+
+  var addingError = function(message) {alert(message);};
+
   var success = function(message) {
-
       if (message == ""){
-
         window.plugins.calendar.createEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,addingComplete,addingError);
       }
       else {
-
-        alert(JSON.stringify(message));
-
+        alert("You already have this event in your calendar");
       }
-
   };
+
   var error = function(message) { alert(JSON.stringify(message)); };
 
-
   window.plugins.calendar.findEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error);
-
-  // if (window.plugins.calendar.findEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error))
-  // {
-  //   alert("There is such event in your calendar");
-  // }
-  // else {
-  //   window.plugins.calendar.createEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error);
-  // }
-
 }
 
 function showActivityIndicator(popupMessage)
