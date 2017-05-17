@@ -488,14 +488,17 @@ showToast = function (text) {
 
 function sendInvs(){
     var count = $("#usersFieldSet input:checked").length;
-    var str = '';
+    var str = "";
 
     for(i=0;i<count;i++){
-        str += ' '+$("#usersFieldSet input:checked")[i].value+', ';
+        str += " "+$("#usersFieldSet input:checked")[i].value+" , ";
 
     }
+    var test = "test";
 
-    if (str = '')
+    console.log(test, str);
+
+    if (str = "")
     {
       alert("You have not selected any user!");
     }
@@ -503,8 +506,6 @@ function sendInvs(){
       window.location = 'mailto:' + str + '?subject=' + "Event Guide Invitation" + '&body=' +   'You have recieved invitation to Event by EventGuide App. Scan QR CODE by EventGuide app to see details and sing in this Event. Link: ' + eventDetails["QR Code"] ;
 
     }
-    // window.location = 'mailto:' + str + '?subject=' + "Event Guide Invitation" + '&body=' +   'You have recieved invitation to Event by EventGuide App. Scan QR CODE by EventGuide app to see details and sing in this Event. Link: ' + eventDetails["QR Code"] ;
-
 }
 
 document.addEventListener('deviceready', function () {
