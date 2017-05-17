@@ -489,30 +489,22 @@ showToast = function (text) {
 function sendInvs(){
     var count = $("#usersFieldSet input:checked").length;
     var str = '';
-    var emailsArray = {};
+
     for(i=0;i<count;i++){
         str += ' '+$("#usersFieldSet input:checked")[i].value+', ';
 
     }
 
-    cordova.plugins.email.isAvailable(
+    if (str = '')
+    {
+      alert("You have not selected any user!");
+    }
+    else {
+      window.location = 'mailto:' + str + '?subject=' + "Event Guide Invitation" + '&body=' +   'You have recieved invitation to Event by EventGuide App. Scan QR CODE by EventGuide app to see details and sing in this Event. Link: ' + eventDetails["QR Code"] ;
 
-        function (isAvailable) {
-            alert('Before proceeding check your mail settings ...' + isAvailable);
-        }
-    );
+    }
+    // window.location = 'mailto:' + str + '?subject=' + "Event Guide Invitation" + '&body=' +   'You have recieved invitation to Event by EventGuide App. Scan QR CODE by EventGuide app to see details and sing in this Event. Link: ' + eventDetails["QR Code"] ;
 
-    cordova.plugins.email.open({
-    to:      'contact@kartwal.pl',
-    subject: 'EventGuide invitation',
-    body:    '<h1>You have invitation from EventGuide APP.</h1><p>Scan QR Code with Event Guide App<p><img class="eventQRCode" id="QRcode" src=' + response["QR Code"] + '>',
-    isHtml:  true
-  });
-
-    cordova.plugins.email.open({
-    app: 'gmail',
-    subject: 'Sent from Gmail'
-})
 }
 
 document.addEventListener('deviceready', function () {
