@@ -506,14 +506,28 @@ function sendInvs(){
 
 function createNewEvent()
 {
+  var valid = true;
   var dict = [];
   $('#createEventFielset :input').each(function(index,element) {
-      dict.push({
-        key:   element.id,
-        value:  element.value
-      });
+      if (element.value == "")
+      {
+        valid = false
+      }
+      else {
+        dict.push({
+          key:   element.id,
+          value:  element.value
+        });
+      }
   });
-    console.log(dict);
+  if (valid == false)
+  {
+    alert("You must fill all the fields");
+  }else {
+    alert("Great !");
+    sendEventData(dict);
+  }
+
 }
 
 function sendEventData(newEventData){
