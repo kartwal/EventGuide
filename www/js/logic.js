@@ -471,6 +471,21 @@ function createCheckboxes(usersArray){
 
 }
 
+showToast = function (text) {
+                text = text == null ? 'finished or canceled' : text;
+                setTimeout(function () {
+                    if (window.Windows !== undefined) {
+                        showWinDialog(text);
+                    } else
+                    if (window.plugins && window.plugins.toast) {
+                        window.plugins.toast.showShortBottom(String(text));
+                    }
+                    else {
+                        alert(text);
+                    }
+                }, 100);
+            };
+
 function sendInvs(){
     var count = $("#usersFieldSet input:checked").length;
     var str = '';
@@ -478,6 +493,20 @@ function sendInvs(){
         str += ' '+$("#usersFieldSet input:checked")[i].value;
     }
     alert("You selected----"+str);
+
+    hasAccount = function (app) {
+                plugin.email.isAvailable(function(hasAccount) {
+                    showToast(hasAccount);
+                });
+            };
+            hasMailApp = function (app) {
+                plugin.email.isAvailable(app, function(hasAccount, hasMailApp) {
+                    showToast(hasMailApp);
+                });
+            };
+            emptyDraft = function (app) {
+                cordova.plugins.email.open({ app:app }, showToast);
+            };
 
     cordova.plugins.email.open({
                     to: 'to@email.de',
