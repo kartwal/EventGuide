@@ -490,21 +490,21 @@ function sendInvs(){
     var count = $("#usersFieldSet input:checked").length;
     var str = '';
     for(i=0;i<count;i++){
-        str += ' '+$("#usersFieldSet input:checked")[i].value;
+        str += ' '+$("#usersFieldSet input:checked")[i].value+', ';
     }
     alert("You selected----"+str);
 
     cordova.plugins.email.isAvailable(
 
-                function (isAvailable) {
+        function (isAvailable) {
+            alert('Before proceeding check your mail settings ...') ;
+        }
+    );
 
-                    alert('Before proceeding check your mail settings ...') ;
-
-                  
-
-                }
-
-            );
-
-          cordova.plugins.email.open();
+    cordova.plugins.email.open({
+    to:      [str],
+    subject: 'Event Guide Invitation',
+    body:    'You have recieved invitation to event! Check it by EventGuide app, just scan QR Code provided in link. <img src=' + response["QR Code"] + '>',
+    isHtml: true
+});
 }
