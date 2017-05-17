@@ -150,8 +150,9 @@ function signUserToEvent()
             headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': "0510427259451e8d38bf38ef2a5b2bac" },
             data: jQuery.param({eventID: eventDetails["Event ID"]}),
             success: function (response) {
+
               hideActivityIndicator();
-              
+
               switch (response["responseCode"]) {
 
                 case 1:
@@ -223,7 +224,15 @@ function createEventInCalendar()
   var end = new Date(eventDetails["Event End Date"]);
   var success = function(message) { alert("Event has been added into calendar"); };
   var error = function(message) { alert("Error: " + message); };
-  window.plugins.calendar.createEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error);
+
+  if (window.plugins.calendar.findEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error))
+  {
+    alert("There is such event in your calendar");
+  }
+  else {
+    window.plugins.calendar.createEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error);
+  }
+
 }
 
 function showActivityIndicator(popupMessage)
