@@ -486,5 +486,5 @@ function sendInvs(){
                     subject: isHtml ? 'Body with HTML and CSS3' : 'Body with plain text',
                     body: getBody(isHtml),
                     isHTML: isHtml
-                }, showToast);
+                }, alert("ok"));
 }
