@@ -137,7 +137,7 @@ function registerAccount(userEmail, userPassword)
             }
         });
 }
-$(document).on('pageinit', "#listPage",function(){
+$(document).on('pagecreate', "#listPage",function(){
 
   showActivityIndicator("Downloading content...");
   downloadEventsList();
@@ -146,7 +146,7 @@ $(document).on('pageinit', "#listPage",function(){
 
 });
 
-$(document).on('pageinit', "#settings",function(){
+$(document).on('pagecreate', "#settings",function(){
 
   showActivityIndicator("Downloading user data...");
   downloadUserEvents();
@@ -155,8 +155,16 @@ $(document).on('pageinit', "#settings",function(){
 
 });
 
+$(document).on('pagecreate', "#detailPage",function(){
+
+  showActivityIndicator("Downloading content...");
+
+});
+
+
 $(document).on('pagebeforehide', "#detailPage", function(){
   $('#detailsContent').empty();
+  eventDetails = {};
 
 });
 
@@ -167,15 +175,14 @@ function navigateToEventPlace()
 
 function goToEventWebsite()
 {
-  window.open('https://www.eslgaming.com', '_blank', 'location=no,hidden=yes,closebuttoncaption=Done,toolbar=no');
+  window.open(eventDetails['Event Website'], '_blank', 'location=yes');
 }
 
 function createEventInCalendar()
 {
-  console.log("creating event...");
-  var start = new Date(eventDetails["Event Start Date"]); // beware: month 0 = january, 11 = december
+  var start = new Date(eventDetails["Event Start Date"]);
   var end = new Date(eventDetails["Event End Date"]);
-  var success = function(message) { alert("Success: " + JSON.stringify(message)); };
+  var success = function(message) { alert("Event has been added into calendar"); };
   var error = function(message) { alert("Error: " + message); };
   window.plugins.calendar.createEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error);
 }
@@ -193,7 +200,7 @@ function hideActivityIndicator()
 function goToEventDetails(eventDetailsID)
 {
     $.mobile.pageContainer.pagecontainer('change', '#detailPage', {reverse: false, changeHash: true, transition: 'slide'});
-    showActivityIndicator("Downloading event details...");
+    // showActivityIndicator("Downloading event details...");
     downloadEventDetails(eventDetailsID);
     hideActivityIndicator();
 }
@@ -245,7 +252,7 @@ function downloadEventDetails(detailsID)
                 $('#detailsContent').append('<div><img class="eventImage" src=' + response["event_image"] + '></div><div class="eventTitle">' + response["event_title"] + '</div><div class="eventDescription">' + response["event_description"] + '</div>');
                 var tempString = '';
                 $.each(response, function (index, itemData) {
-                  if (index != "error" && index != "event_title" && index != "event_image" && index != "event_description" && index != "event_description_short" && index != "event_accepted" && index != "QR Code")
+                  if (index != "error" && index != "event_title" && index != "event_image" && index != "event_description" && index != "event_description_short" && index != "event_accepted" && index != "QR Code" && index != "Event Website" && index != "Event Latitude" && index != "Event Longitude")
                   {
                     console.log(index);
                       switch (index) {
@@ -311,11 +318,17 @@ function downloadUserEvents()
               }
               else {
                 console.log(response);
-                for(var i = 0; i < response["events"].length; i += 1)
-                {
-                   $('#userEventsList').append('<li class="listItem"><a id="eventListItem" onclick="goToEventDetails(' + response["events"][i]["event_id"] + ')"><img src=' + response["events"][i]["event_image"] + '><div class="listTitle">' + response["events"][i]["event_title"] + '</div>' + '<div class="listDesc">' + response["events"][i]["event_description_short"] + '</div>' + '<div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">' + response["events"][i]["event_start_date"] + '</div>' + '<div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">' + response["events"][i]["participants"] + '</div>'+ '</div></a></li>').listview('refresh');
-                }
 
+                if (response["events"].length == 0)
+                {
+                  $('#userEventsList').append('<p>You have not subscribed to any event yet</p>');
+                }
+                else {
+                  for(var i = 0; i < response["events"].length; i += 1)
+                  {
+                     $('#userEventsList').append('<li class="listItem"><a id="eventListItem" onclick="goToEventDetails(' + response["events"][i]["event_id"] + ')"><img src=' + response["events"][i]["event_image"] + '><div class="listTitle">' + response["events"][i]["event_title"] + '</div>' + '<div class="listDesc">' + response["events"][i]["event_description_short"] + '</div>' + '<div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">' + response["events"][i]["event_start_date"] + '</div>' + '<div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">' + response["events"][i]["participants"] + '</div>'+ '</div></a></li>').listview('refresh');
+                  }
+                }
               }
             },
             error: function (errormessage) {
@@ -347,7 +360,7 @@ function scan()
                         alert("Sorry, only qr codes are supported");
                      }
               }else{
-                //scan was dismissed by user
+                //scan was dismissed by user, no alert
               }
            },
            function (error) {

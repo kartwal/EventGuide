@@ -12,11 +12,10 @@
         <link rel="stylesheet" href="css/detailsView.css"/>
         <link rel="stylesheet" href="css/accountView.css"/>
 
-
     		<script src="jquery/jquery-2.1.4.min.js"></script>
     		<script src="jquery/jquery.mobile-1.4.5.min.js"></script>
         <script src="jquery/jquery.validate.min.js"></script>
-        <script src="js/formValidation.js"></script>
+        <script src="js/logic.js"></script>
         <script src="js/navigation.js"></script>
         <script scr="js/multilinedText.js"></script>
     </head>
@@ -169,19 +168,9 @@
             <a onclick="createEventInCalendar()" class="buttonToolbar">
               <img src="img/icons/calendarIconWhite.png">
             </a>
-            <a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="buttonToolbar">
+            <a onclick="signUserToEvent()" class="buttonToolbar">
               <img src="img/icons/addIcon.png">
             </a>
-            <div data-role="popup" id="popupDialog" data-overlay-theme="c" data-theme="b" data-dismissible="false">
-                <div data-role="header" data-theme="c">
-                <h1>Sign in to this event ?</h1>
-                </div>
-                <div >
-                    <h3 class="ui-title popupHeader">Are you sure you want sing in to this event ?</h3>
-                    <a href="#" class="ui-btn " data-rel="back" data-transition="flow" onclick="signIntoEvent">Yes, definitly</a>
-                    <a href="#" class="ui-btn " data-rel="back">Cancel</a>
-                </div>
-            </div>
         </div>
   		</div>
 
