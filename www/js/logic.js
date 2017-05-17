@@ -494,16 +494,14 @@ function sendInvs(){
         str += " "+$("#usersFieldSet input:checked")[i].value+" , ";
 
     }
-    var test = "test";
-
-    console.log(test, str);
+    var links = str;
 
     if (str = "")
     {
       alert("You have not selected any user!");
     }
     else {
-      window.location = 'mailto:' + str + '?subject=' + "Event Guide Invitation" + '&body=' +   'You have recieved invitation to Event by EventGuide App. Scan QR CODE by EventGuide app to see details and sing in this Event. Link: ' + eventDetails["QR Code"] ;
+      window.location = 'mailto:' + links + '?subject=' + "Event Guide Invitation" + '&body=' +   'You have recieved invitation to Event by EventGuide App. Scan QR CODE by EventGuide app to see details and sing in this Event. Link: ' + eventDetails["QR Code"] ;
 
     }
 }
