@@ -519,14 +519,14 @@ function createNewEvent()
         });
       }
   });
-  // if (valid == false)
-  // {
-  //   alert("You must fill all the fields");
-  // }else {
-    // alert("Great !");
+  if (valid == false)
+  {
+    alert("You must fill all the fields");
+  }else {
+    alert("Great !");
     console.log(dict);
     sendEventData(dict);
-  // }
+  }
 
 }
 
