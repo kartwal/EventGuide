@@ -14,6 +14,8 @@
         Adrianna Gałka, Kamil Walas
     </author>
     <content src="index.html" />
+    <gap:plugin name="cordova-plugin-email-composer" source="npm" version="0.8.3" />
+    <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
     <access origin="*" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />

@@ -197,8 +197,9 @@ $(document).on('pagecreate', "#settings",function(){
 
 });
 
-$(document).on('pagecreate', "#detailPage",function(){
-
+$(document).on('pagechange', "#detailPage",function(){
+  $('#detailsContent').empty();
+  eventDetails = {};
   showActivityIndicator("Downloading content...");
 
 });
@@ -209,10 +210,10 @@ $(document).on('pagecreate', "#inviteUsers",function(){
 
 });
 
-$(document).on('pagebeforehide', "#detailPage", function(){
+$(document).on('pagebeforeshow', "#listPage", function(){
+
   $('#detailsContent').empty();
   eventDetails = {};
-
 });
 
 function navigateToEventPlace()
@@ -470,11 +471,54 @@ function createCheckboxes(usersArray){
 
 }
 
-function showSelectedNames(){
+function sendInvs(){
     var count = $("#usersFieldSet input:checked").length;
     var str = '';
+    var emailsArray = {};
     for(i=0;i<count;i++){
-        str += ' '+$("#usersFieldSet input:checked")[i].value;
+        str += ' '+$("#usersFieldSet input:checked")[i].value+', ';
+
     }
-    alert("You selected----"+str);
+
+
+
+    window.plugins.socialsharing.shareViaEmail(
+  'Message', // can contain HTML tags, but support on Android is rather limited:  http://stackoverflow.com/questions/15136480/how-to-send-html-content-with-image-through-android-default-email-client
+  'Subject',
+  ['to@person1.com', 'to@person2.com'], // TO: must be null or an array
+  ['cc@person1.com'], // CC: must be null or an array
+  null, // BCC: must be null or an array
+  ['https://www.google.nl/images/srpr/logo4w.png','www/localimage.png'], // FILES: can be null, a string, or an array
+  onSuccess, // called when sharing worked, but also when the user cancelled sharing via email. On iOS, the callbacks' boolean result parameter is true when sharing worked, false if cancelled. On Android, this parameter is always true so it can't be used). See section "Notes about the successCallback" below.
+  onError // called when sh*t hits the fan
+);
+
+$cordovaEmailComposer.isAvailable().then(function() {
+   // is available
+ }, function () {
+   // not available
+ });
+
+  var email = {
+    to: 'max@mustermann.de',
+    cc: 'erika@mustermann.de',
+    bcc: ['john@doe.com', 'jane@doe.com'],
+    attachments: [
+      'file://img/logo.png',
+      'res://icon.png',
+      'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
+      'file://README.pdf'
+    ],
+    subject: 'Cordova Icons',
+    body: 'How are you? Nice greetings from Leipzig',
+    isHtml: true
+  };
+
+ $cordovaEmailComposer.open(email).then(null, function () {
+   // user cancelled email
+ });
 }
+
+document.addEventListener('deviceready', function () {
+    alert("Loaded ok");
+}, false);
