@@ -471,6 +471,21 @@ function createCheckboxes(usersArray){
 
 }
 
+showToast = function (text) {
+                text = text == null ? 'finished or canceled' : text;
+                setTimeout(function () {
+                    if (window.Windows !== undefined) {
+                        showWinDialog(text);
+                    } else
+                    if (window.plugins && window.plugins.toast) {
+                        window.plugins.toast.showShortBottom(String(text));
+                    }
+                    else {
+                        alert(text);
+                    }
+                }, 100);
+            };
+
 function sendInvs(){
     var count = $("#usersFieldSet input:checked").length;
     var str = '';
@@ -480,43 +495,24 @@ function sendInvs(){
 
     }
 
+    cordova.plugins.email.isAvailable(
 
+        function (isAvailable) {
+            alert('Before proceeding check your mail settings ...') ;
+        }
+    );
 
-    window.plugins.socialsharing.shareViaEmail(
-  'Message', // can contain HTML tags, but support on Android is rather limited:  http://stackoverflow.com/questions/15136480/how-to-send-html-content-with-image-through-android-default-email-client
-  'Subject',
-  ['to@person1.com', 'to@person2.com'], // TO: must be null or an array
-  ['cc@person1.com'], // CC: must be null or an array
-  null, // BCC: must be null or an array
-  ['https://www.google.nl/images/srpr/logo4w.png','www/localimage.png'], // FILES: can be null, a string, or an array
-  onSuccess, // called when sharing worked, but also when the user cancelled sharing via email. On iOS, the callbacks' boolean result parameter is true when sharing worked, false if cancelled. On Android, this parameter is always true so it can't be used). See section "Notes about the successCallback" below.
-  onError // called when sh*t hits the fan
-);
+    cordova.plugins.email.open({
+    to:      'contact@kartwal.pl',
+    subject: 'EventGuide invitation',
+    body:    '<h1>You have invitation from EventGuide APP.</h1><p>Scan QR Code with Event Guide App<p><img class="eventQRCode" id="QRcode" src=' + response["QR Code"] + '>',
+    isHtml:  true
+  }fakecallback);
 
-$cordovaEmailComposer.isAvailable().then(function() {
-   // is available
- }, function () {
-   // not available
- });
-
-  var email = {
-    to: 'max@mustermann.de',
-    cc: 'erika@mustermann.de',
-    bcc: ['john@doe.com', 'jane@doe.com'],
-    attachments: [
-      'file://img/logo.png',
-      'res://icon.png',
-      'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
-      'file://README.pdf'
-    ],
-    subject: 'Cordova Icons',
-    body: 'How are you? Nice greetings from Leipzig',
-    isHtml: true
-  };
-
- $cordovaEmailComposer.open(email).then(null, function () {
-   // user cancelled email
- });
+    cordova.plugins.email.open({
+    app: 'gmail',
+    subject: 'Sent from Gmail'
+})
 }
 
 document.addEventListener('deviceready', function () {
