@@ -495,11 +495,5 @@ function sendInvs(){
     alert("You selected----"+str);
 
 
-            cordova.plugins.email.open({
-                to:      'max@mustermann.de',
-                cc:      'erika@mustermann.de',
-                bcc:     ['john@doe.com', 'jane@doe.com'],
-                subject: 'Greetings',
-                body:    'How are you? Nice greetings from Leipzig'
-            });
+          cordova.plugins.email.open();
 }
