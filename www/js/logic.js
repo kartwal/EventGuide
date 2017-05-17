@@ -224,7 +224,19 @@ function createEventInCalendar()
   var end = new Date(eventDetails["Event End Date"]);
   var addingComplete = function(message) {alert(message)};
   var addingError = function(message) {alert(message)};
-  var success = function(message) { alert(JSON.stringify(message)); };
+  var success = function(message) {
+
+      if (JSON.stringify(message).length == 0){
+
+        alert("No such event");
+      }
+      else {
+
+        alert(JSON.stringify(message)); 
+
+      }
+
+  };
   var error = function(message) { alert(JSON.stringify(message)); window.plugins.calendar.createEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,addingComplete,addingError) };
 
 
