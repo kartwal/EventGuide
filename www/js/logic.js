@@ -226,13 +226,13 @@ function createEventInCalendar()
   var addingError = function(message) {alert(message)};
   var success = function(message) {
 
-      if (JSON.stringify(message).length == 0){
+      if (message == ""){
 
         alert("No such event");
       }
       else {
 
-        alert(JSON.stringify(message)); 
+        alert(JSON.stringify(message));
 
       }
 
