@@ -198,23 +198,29 @@ $(document).on('pagecreate', "#settings",function(){
 });
 
 $(document).on('pagechange', "#detailPage",function(){
-  $('#detailsContent').empty();
-  eventDetails = {};
-  showActivityIndicator("Downloading content...");
+  // $('#detailsContent').empty();
+  // eventDetails = {};
+  // showActivityIndicator("Downloading content...");
 
 });
 
 $(document).on('pagecreate', "#inviteUsers",function(){
-
+  $('#usersSet').empty();
   downloadUsers();
-
 });
 
 $(document).on('pagebeforeshow', "#listPage", function(){
-
   $('#detailsContent').empty();
   eventDetails = {};
 });
+
+$(document).on('pagebeforeshow', "#settings", function(){
+  $('#detailsContent').empty();
+  eventDetails = {};
+});
+
+
+
 
 function navigateToEventPlace()
 {
@@ -262,7 +268,7 @@ function hideActivityIndicator()
 function goToEventDetails(eventDetailsID)
 {
     $.mobile.pageContainer.pagecontainer('change', '#detailPage', {reverse: false, changeHash: true, transition: 'slide'});
-    // showActivityIndicator("Downloading event details...");
+    showActivityIndicator("Downloading event details...");
     downloadEventDetails(eventDetailsID);
     hideActivityIndicator();
 }
@@ -406,7 +412,15 @@ function downloadUserEvents()
                 console.log(response["message"]);
               }
               else {
-                console.log(response);
+
+                var userDataTable = "";
+
+                userDataTable += '<tr><th>' + "Login:" + '</th><td>' + userCredentialsData["name"] + '</td></tr></div';
+                userDataTable += '<tr><th>' + "Email Address:" + '</th><td>' + userCredentialsData["email"] + '</td></tr></div';
+
+
+                userDataTable += '</table></div>';
+                $('#userCredData').append('<div class="eventTable"><table class="eventTableStyle">' + userDataTable);
 
                 if (response["events"].length == 0)
                 {
@@ -488,4 +502,20 @@ function sendInvs(){
     else {
       window.location = 'mailto:' + links + '?subject=' + "Event Guide Invitation" + '&body=' +   'You have recieved invitation to Event by EventGuide App. Scan QR CODE by EventGuide app to see details and sign in this Event. Link: ' + eventDetails["QR Code"] ;
     }
+}
+
+function createNewEvent()
+{
+  var dict = [];
+  $('#createEventFielset :input').each(function(index,element) {
+      dict.push({
+        key:   element.id,
+        value:  element.value
+      });
+  });
+    console.log(dict);
+}
+
+function sendEventData(newEventData){
+
 }
