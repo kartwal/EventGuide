@@ -224,11 +224,11 @@ function createEventInCalendar()
   var end = new Date(eventDetails["Event End Date"]);
   var addingComplete = function(message) {alert(message)};
   var addingError = function(message) {alert(message)};
-  var success = function(message) { alert(message); };
-  var error = function(message) { alert("Not exists: " + message); window.plugins.calendar.createEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,addingComplete,addingError) };
+  var success = function(message) { alert(JSON.stringify(message)); };
+  var error = function(message) { alert(JSON.stringify(message)); window.plugins.calendar.createEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,addingComplete,addingError) };
 
 
-  window.plugins.calendar.findEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error)
+  window.plugins.calendar.findEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error);
 
   // if (window.plugins.calendar.findEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error))
   // {
