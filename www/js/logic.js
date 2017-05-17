@@ -494,6 +494,17 @@ function sendInvs(){
     }
     alert("You selected----"+str);
 
+    cordova.plugins.email.isAvailable(
+
+                function (isAvailable) {
+
+                    alert('Before proceeding check your mail settings ...') ;
+
+                  
+
+                }
+
+            );
 
           cordova.plugins.email.open();
 }
