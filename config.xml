@@ -19,7 +19,7 @@
     <plugin name="cordova-plugin-inappbrowser" />
     <plugin name="cordova-plugin-pdialog" />
     <gap:plugin name="cordova-plugin-email-composer" version="0.8.3" source="npm" />
-    <plugin name="cordova-plugin-x-socialsharing" />
+    <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="3" />
 
     <preference name="StatusBarOverlaysWebView" value="false" />
