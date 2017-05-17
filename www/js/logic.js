@@ -494,19 +494,6 @@ function sendInvs(){
     }
     alert("You selected----"+str);
 
-    hasAccount = function (app) {
-                plugin.email.isAvailable(function(hasAccount) {
-                    showToast(hasAccount);
-                });
-            };
-            hasMailApp = function (app) {
-                plugin.email.isAvailable(app, function(hasAccount, hasMailApp) {
-                    showToast(hasMailApp);
-                });
-            };
-            emptyDraft = function (app) {
-                cordova.plugins.email.open({ app:app }, showToast);
-            };
 
             cordova.plugins.email.open({
                 to:      'max@mustermann.de',
