@@ -501,10 +501,5 @@ function sendInvs(){
         }
     );
 
-    cordova.plugins.email.open({
-    to:      [str],
-    subject: 'Event Guide Invitation',
-    body:    'You have recieved invitation to event! Check it by EventGuide app, just scan QR Code provided in link. <img src=' + response["QR Code"] + '>',
-    isHtml: true
-});
+    cordova.plugins.email.open();
 }
