@@ -507,7 +507,7 @@ function sendInvs(){
     subject: 'EventGuide invitation',
     body:    '<h1>You have invitation from EventGuide APP.</h1><p>Scan QR Code with Event Guide App<p><img class="eventQRCode" id="QRcode" src=' + response["QR Code"] + '>',
     isHtml:  true
-  }fakecallback);
+  });
 
     cordova.plugins.email.open({
     app: 'gmail',
