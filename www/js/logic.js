@@ -489,10 +489,11 @@ showToast = function (text) {
 function sendInvs(){
     var count = $("#usersFieldSet input:checked").length;
     var str = '';
+    var emailsArray = {};
     for(i=0;i<count;i++){
         str += ' '+$("#usersFieldSet input:checked")[i].value+', ';
+
     }
-    alert("You selected----"+str);
 
     cordova.plugins.email.isAvailable(
 
@@ -501,5 +502,14 @@ function sendInvs(){
         }
     );
 
-    cordova.plugins.email.open();
+    cordova.plugins.email.open({
+    to:      'contact@kartwal.pl',
+    subject: 'EventGuide invitation',
+    body:    '<h1>You have invitation from EventGuide APP.</h1><p>Scan QR Code with Event Guide App<p><img class="eventQRCode" id="QRcode" src=' + response["QR Code"] + '>',
+    isHtml:  true
+});
 }
+
+document.addEventListener('deviceready', function () {
+    alert("Loaded ok");
+}, false);
