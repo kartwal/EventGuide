@@ -478,4 +478,13 @@ function sendInvs(){
         str += ' '+$("#usersFieldSet input:checked")[i].value;
     }
     alert("You selected----"+str);
+
+    cordova.plugins.email.open({
+                    to: 'to@email.de',
+                    cc: [str],
+                    bcc: ['bcc1@email.de', 'bcc2@email.de'],
+                    subject: isHtml ? 'Body with HTML and CSS3' : 'Body with plain text',
+                    body: getBody(isHtml),
+                    isHTML: isHtml
+                }, showToast);
 }
