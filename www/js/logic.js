@@ -515,21 +515,48 @@ function createNewEvent()
       }
       else {
         dict.push({
-          key:   element.id,
           value:  element.value
         });
       }
   });
-  if (valid == false)
-  {
-    alert("You must fill all the fields");
-  }else {
-    alert("Great !");
+  // if (valid == false)
+  // {
+  //   alert("You must fill all the fields");
+  // }else {
+    // alert("Great !");
+    console.log(dict);
     sendEventData(dict);
-  }
+  // }
 
 }
 
 function sendEventData(newEventData){
+
+  console.log(newEventData.even);
+    $.ajax({
+              type: "POST",
+              url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/createEvent",
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': "0510427259451e8d38bf38ef2a5b2bac"},
+              data: jQuery.param({event_title: newEventData[0].value, event_description : newEventData[1].value, event_latitude : newEventData[2].value, event_longitude : newEventData[3].value, event_start_date : newEventData[4].value, event_end_date : newEventData[5].value, event_additional_info : newEventData[6].value, event_image : newEventData[7].value, event_max_participants : newEventData[8].value, event_description_short : newEventData[9].value, event_address : newEventData[10].value, event_city : newEventData[11].value, event_tickets : newEventData[13].value, event_card_payment : newEventData[14].value, event_accepted : "0", event_website : newEventData[12].value}),
+              success: function (response) {
+                  console.log(response);
+                if (response["error"] == true)
+                {
+                  console.log(response["error"]);
+                  hideActivityIndicator();
+                  alert(response["message"]);
+                } else {
+                  hideActivityIndicator();
+                  alert("Event was created successfully. Admin must accept your event. It will take couple of minutes");
+                }
+              },
+              error: function (errormessage) {
+                hideActivityIndicator();
+                console.log(errormessage["responseText"]);
+                  alert("There was an error - try again later");
+              }
+          });
 
 }
