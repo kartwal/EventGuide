@@ -471,21 +471,6 @@ function createCheckboxes(usersArray){
 
 }
 
-showToast = function (text) {
-                text = text == null ? 'finished or canceled' : text;
-                setTimeout(function () {
-                    if (window.Windows !== undefined) {
-                        showWinDialog(text);
-                    } else
-                    if (window.plugins && window.plugins.toast) {
-                        window.plugins.toast.showShortBottom(String(text));
-                    }
-                    else {
-                        alert(text);
-                    }
-                }, 100);
-            };
-
 function sendInvs(){
     var count = $("#usersFieldSet input:checked").length;
     var str = "";
@@ -496,35 +481,11 @@ function sendInvs(){
     }
     var links = str;
 
-    if (str = "")
+    if (str == "")
     {
       alert("You have not selected any user!");
     }
     else {
-      window.location = 'mailto:' + links + '?subject=' + "Event Guide Invitation" + '&body=' +   'You have recieved invitation to Event by EventGuide App. Scan QR CODE by EventGuide app to see details and sing in this Event. Link: ' + eventDetails["QR Code"] ;
-
+      window.location = 'mailto:' + links + '?subject=' + "Event Guide Invitation" + '&body=' +   'You have recieved invitation to Event by EventGuide App. Scan QR CODE by EventGuide app to see details and sign in this Event. Link: ' + eventDetails["QR Code"] ;
     }
-}
-
-document.addEventListener('deviceready', function () {
-    cordova.plugins.email.isAvailable(
-        function (isAvailable) {
-            alert("is email mobile available? " + (isAvailable ? "Yes" : "No"));
-            if(isAvailable){
-             window.plugin.email.open({
-                 to:      'test@test.com',
-                 subject: 'Greetings',
-                 body:    'How are you? Nice greetings from Leipzig'
-             }, callback, scope);
-           }
-        }
-    );
-}, false);
-
-function callback(){
-    console.log("callback function");
-}
-
-function scope(){
-    console.log("scope function");
 }
