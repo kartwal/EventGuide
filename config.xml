@@ -19,6 +19,7 @@
     <plugin name="cordova-plugin-inappbrowser" />
     <plugin name="cordova-plugin-pdialog" />
     <plugin name="cordova-plugin-splashscreen" />
+    <plugin name="cordova-plugin-network-information" />
 
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="3" />
 
@@ -38,7 +39,7 @@
      </platform>
 
      <platform name="android">
-       <splash src="res/screen/android/splash.png"/>
+       <splash src="res/android/splash.png"/>
      </platform>
 
 
