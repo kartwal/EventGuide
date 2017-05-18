@@ -1,4 +1,4 @@
-var userCredentialsData = {};
+
 var eventDetails = {};
 
 function validateLogin() {
@@ -81,101 +81,143 @@ function closeRegisterPopup()
 
 function loginInto(userEmail, userPassword)
 {
-  showActivityIndicator("Logging in...");
-  $.ajax({
-            type: "POST",
-            url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/login",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            data: jQuery.param({email: userEmail, password: userPassword}),
-            success: function (response) {
-              if (response["error"] == true) {
+  if (checkConnection()){
+    showActivityIndicator("Logging in...");
+    $.ajax({
+              type: "POST",
+              url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/login",
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              data: jQuery.param({email: userEmail, password: userPassword}),
+              success: function (response) {
+                if (response["error"] == true) {
+                  hideActivityIndicator();
+                  alert(response["message"]);
+                }
+                else {
+                  localStorage.setItem("userEmail", response["email"]);
+                  localStorage.setItem("userApiKey", response["apiKey"]);
+                  localStorage.setItem("userLogin", response["name"]);
+                  hideActivityIndicator();
+                  $.mobile.pageContainer.pagecontainer('change', '#listPage', {reverse: false, changeHash: true, transition: 'slide'});
+                }
+              },
+              error: function (errormessage) {
                 hideActivityIndicator();
-                alert(response["message"]);
+                alert(errormessage);
+                console.log(errormessage);
               }
-              else {
+          });
+  }
+  else{
+    alert("You dont have internet connection. Action cannot be performed.")
+  }
 
-                console.log(response);
-                userCredentialsData = response;
-                hideActivityIndicator();
-                $.mobile.pageContainer.pagecontainer('change', '#listPage', {reverse: false, changeHash: true, transition: 'slide'});
-              }
-            },
-            error: function (errormessage) {
-              hideActivityIndicator();
-              alert(errormessage);
-              console.log(errormessage);
-            }
-        });
 }
 
 function registerAccount(userEmail, userPassword, userLogin)
 {
-  showActivityIndicator("Register is performing...");
 
-  $.ajax({
-            type: "POST",
-            url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/register",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            data: jQuery.param({email: userEmail, password: userPassword, login: userLogin }),
-            success: function (response) {
-              if (response["error"] == true)
-              {
-                console.log(response["error"]);
+
+  if (checkConnection()){
+    showActivityIndicator("Register is performing...");
+    $.ajax({
+              type: "POST",
+              url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/register",
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              data: jQuery.param({email: userEmail, password: userPassword, login: userLogin }),
+              success: function (response) {
+                if (response["error"] == true)
+                {
+                  console.log(response["error"]);
+                  hideActivityIndicator();
+                  alert(response["message"]);
+                } else {
+                  hideActivityIndicator();
+                  alert("Registration complete. Now you can log in.");
+                }
+              },
+              error: function (errormessage) {
                 hideActivityIndicator();
-                alert(response["message"]);
-              } else {
-                hideActivityIndicator();
-                alert("Registration complete. Now you can log in.");
+                  alert(errormessage);
               }
-            },
-            error: function (errormessage) {
-              hideActivityIndicator();
-                alert(errormessage);
-            }
-        });
+          });
+  }
+  else{
+    alert("You dont have internet connection. Action cannot be performed.")
+  }
+
 }
 
-function signUserToEvent()
+function signUserToEvent(buttonIndex)
 {
-  showActivityIndicator("Signing to evnet...");
+  if (buttonIndex == 1)
+  {
+    if (checkConnection()){
+      showActivityIndicator("Signing to evnet...");
 
-  $.ajax({
-            type: "POST",
-            url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/signUserToEvent",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': "0510427259451e8d38bf38ef2a5b2bac" },
-            data: jQuery.param({eventID: eventDetails["Event ID"]}),
-            success: function (response) {
+      $.ajax({
+                type: "POST",
+                url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/signUserToEvent",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': localStorage.userApiKey },
+                data: jQuery.param({eventID: eventDetails["Event ID"]}),
+                success: function (response) {
 
-              hideActivityIndicator();
+                  hideActivityIndicator();
 
-              switch (response["responseCode"]) {
+                  switch (response["responseCode"]) {
 
-                case 1:
-                  alert(response["message"]);
-                  break;
+                    case 1:
+                      alert(response["message"]);
+                      break;
 
-                case 2:
-                  alert(response["message"]);
-                  break;
+                    case 2:
+                      alert(response["message"]);
+                      break;
 
-                case 0:
-                  alert(response["message"]);
-                  break;
-                default:
+                    case 0:
+                      alert(response["message"]);
+                      break;
+                    default:
 
-              }
+                  }
 
-            },
-            error: function (errormessage) {
-                console.log(errormessage);
-            }
-        });
+                },
+                error: function (errormessage) {
+                    console.log(errormessage);
+                }
+            });
+    }
+    else{
+      alert("You dont have internet connection. Action cannot be performed.")
+    }
+
+  }
+}
+
+function askToSign()
+{
+  navigator.notification.confirm(
+    'Do you want to sign in this event ?',  // message
+    signUserToEvent,         // callback
+    'Sign to event',            // title
+    ['Yes','No']                 // buttonName
+  );
+}
+
+function askToAddIntoCalendar()
+{
+  navigator.notification.confirm(
+    'Do you want to add this event into your calendar?',  // message
+    createEventInCalendar,         // callback
+    'Sign to event',            // title
+    ['Yes','No']                 // buttonName
+  );
 }
 
 $(document).on('pagecreate', "#listPage",function(){
@@ -187,19 +229,22 @@ $(document).on('pagecreate', "#listPage",function(){
 
 });
 
-$(document).on('pagecreate', "#settings",function(){
+$(document).on('pagebeforeshow', "#settings",function(){
 
-  showActivityIndicator("Downloading user data...");
-  downloadUserEvents();
-  $('#userEventsContainer').show();
-  hideActivityIndicator();
+  $('#settingsContent').hide();
 
 });
 
-$(document).on('pagechange', "#detailPage",function(){
-  // $('#detailsContent').empty();
-  // eventDetails = {};
-  // showActivityIndicator("Downloading content...");
+$(document).on('pageshow', "#settings",function(){
+
+  showActivityIndicator("Downloading user data...");
+  $('#userEventsList').empty();
+  $('#userCredData').empty();
+  $('#userNoEvents').empty();
+  downloadUserEvents();
+  $('#userEventsContainer').show();
+  $('#settingsContent').show();
+  hideActivityIndicator();
 
 });
 
@@ -211,6 +256,7 @@ $(document).on('pagebeforeshow', "#inviteUsers",function(){
 $(document).on('pagebeforeshow', "#listPage", function(){
   $('#detailsContent').empty();
   eventDetails = {};
+
 });
 
 $(document).on('pagebeforeshow', "#settings", function(){
@@ -218,8 +264,21 @@ $(document).on('pagebeforeshow', "#settings", function(){
   eventDetails = {};
 });
 
+$(document).on('pagecreate', '#login', function(){
+    if (localStorage.userEmail)
+    {
+      document.getElementById("email").value = localStorage.userEmail;
+    }
+});
 
 
+function refreshList()
+{
+  showActivityIndicator("Downloading content...");
+  $('#eventsList').empty();
+  downloadEventsList();
+  hideActivityIndicator();
+}
 
 function navigateToEventPlace()
 {
@@ -231,27 +290,31 @@ function goToEventWebsite()
   window.open(eventDetails['Event Website'], '_blank', 'location=yes');
 }
 
-function createEventInCalendar()
+function createEventInCalendar(buttonIndex)
 {
-  var start = new Date(eventDetails["Event Start Date"]);
-  var end = new Date(eventDetails["Event End Date"]);
+  if (buttonIndex == 1)
+  {
+    var start = new Date(eventDetails["Event Start Date"]);
+    var end = new Date(eventDetails["Event End Date"]);
 
-  var addingComplete = function(message) {alert("Adding into your calendar is complete");};
+    var addingComplete = function(message) {alert("Adding into your calendar is complete");};
 
-  var addingError = function(message) {alert(message);};
+    var addingError = function(message) {alert(message);};
 
-  var success = function(message) {
-      if (message == ""){
-        window.plugins.calendar.createEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,addingComplete,addingError);
-      }
-      else {
-        alert("You already have this event in your calendar");
-      }
-  };
+    var success = function(message) {
+        if (message == ""){
+          window.plugins.calendar.createEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,addingComplete,addingError);
+        }
+        else {
+          alert("You already have this event in your calendar");
+        }
+    };
 
-  var error = function(message) { alert(JSON.stringify(message)); };
+    var error = function(message) { alert(JSON.stringify(message)); };
 
-  window.plugins.calendar.findEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error);
+    window.plugins.calendar.findEvent(eventDetails["event_title"],eventDetails["Event Start Date"],eventDetails["event_description_short"],start,end,success,error);
+  }
+
 }
 
 function showActivityIndicator(popupMessage)
@@ -274,181 +337,196 @@ function goToEventDetails(eventDetailsID)
 
 function downloadEventsList()
 {
-  $.ajax({
-            type: "GET",
-            url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/getEventsList",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            headers: { 'Authorization': "7194581c02ab6087e7da5881be984fe0" },
-            success: function (response) {
-              if (response["error"] == true)
-              {
-                console.log(response["message"]);
-              }
-              else {
-                for(var i = 0; i < response["events"].length; i += 1)
+  if (checkConnection()){
+    $.ajax({
+              type: "GET",
+              url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/getEventsList",
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              headers: { 'Authorization': localStorage.userApiKey },
+              success: function (response) {
+                if (response["error"] == true)
                 {
-                   $('#eventsList').append('<li class="listItem"><a id="eventListItem" onclick="goToEventDetails(' + response["events"][i]["event_id"] + ')"><img src=' + response["events"][i]["event_image"] + '><div class="listTitle">' + response["events"][i]["event_title"] + '</div>' + '<div class="listDesc">' + response["events"][i]["event_description_short"] + '</div>' + '<div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">' + response["events"][i]["event_start_date"] + '</div>' + '<div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">' + response["events"][i]["participants"] + '</div>'+ '</div></a></li>').listview('refresh');
+                  console.log(response["message"]);
                 }
+                else {
+                  for(var i = 0; i < response["events"].length; i += 1)
+                  {
+                     $('#eventsList').append('<li class="listItem"><a id="eventListItem" onclick="goToEventDetails(' + response["events"][i]["event_id"] + ')"><img src=' + response["events"][i]["event_image"] + '><div class="listTitle">' + response["events"][i]["event_title"] + '</div>' + '<div class="listDesc">' + response["events"][i]["event_description_short"] + '</div>' + '<div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">' + response["events"][i]["event_start_date"] + '</div>' + '<div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">' + response["events"][i]["participants"] + '</div>'+ '</div></a></li>').listview('refresh');
+                  }
 
+                }
+              },
+              error: function (errormessage) {
+                  console.log(errormessage);
               }
-            },
-            error: function (errormessage) {
-                console.log(errormessage);
-            }
-        });
-
+          });
+  }
+  else{
+    alert("You dont have internet connection. Action cannot be performed.")
+  }
 }
 
 function downloadUsers()
 {
-  showActivityIndicator("Downloading users list...");
-  $.ajax({
-            type: "GET",
-            url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/getAllUsers",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            headers: { 'Authorization': "7194581c02ab6087e7da5881be984fe0" },
-            success: function (response) {
-              if (response["error"] == true)
-              {
-                console.log(response["message"]);
-              }
-              else {
+  if (checkConnection()){
+    showActivityIndicator("Downloading users list...");
+    $.ajax({
+              type: "GET",
+              url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/getAllUsers",
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              headers: { 'Authorization': localStorage.userApiKey },
+              success: function (response) {
+                if (response["error"] == true)
+                {
+                  console.log(response["message"]);
+                }
+                else {
 
-                createCheckboxes(response["users"]);
+                  createCheckboxes(response["users"]);
 
+                }
+              },
+              error: function (errormessage) {
+                  console.log(errormessage);
               }
-            },
-            error: function (errormessage) {
-                console.log(errormessage);
-            }
-        });
+          });
+  }
+  else{
+    alert("You dont have internet connection. Action cannot be performed.")
+  }
 
 }
 
 function downloadEventDetails(detailsID)
 {
-  $.ajax({
-            type: "GET",
-            url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/event/" + detailsID,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            headers: { 'Authorization': '7194581c02ab6087e7da5881be984fe0' },
-            success: function (response) {
-              if (response["error"] == true)
-              {
-                console.log(response["message"]);
-              }
-              else
-              {
-                eventDetails = response;
-                $('#detailsContent').append('<div><img class="eventImage" src=' + response["event_image"] + '></div><div class="eventTitle">' + response["event_title"] + '</div><div class="eventDescription">' + response["event_description"] + '</div>');
-                var tempString = '';
-                $.each(response, function (index, itemData) {
-                  if (index != "error" && index != "event_title" && index != "event_image" && index != "event_description" && index != "event_description_short" && index != "event_accepted" && index != "QR Code" && index != "Event Website" && index != "Event Latitude" && index != "Event Longitude")
-                  {
-                    console.log(index);
-                      switch (index) {
-                        case ('Event Tickets'):
-                          if (itemData == 0)
-                          {
-                            tempString += '<tr><th>' + index + '</th><td>' + "Tickets are not required" + '</td></tr></div';
-                          }
-                          else {
-                            tempString += '<tr><th>' + index + '</th><td>' + "Tickets are required" + '</td></tr></div';
-                          }
-                          break;
-                        case ("Event card payment"):
-                          if (itemData == 0)
-                          {
-                            tempString += '<tr><th>' + index + '</th><td>' + "Card payment is not supported" + '</td></tr></div';
-                          }
-                          else {
-                            tempString += '<tr><th>' + index + '</th><td>' + "You can pay by card" + '</td></tr></div';
-                          }
-                          break;
-                        case ("Event max participants"):
-                          if (itemData == 0)
-                          {
-                            tempString += '<tr><th>' + index + '</th><td>' + "Unlimited" + '</td></tr></div';
-                          }
-                          else {
+  if (checkConnection()){
+    $.ajax({
+              type: "GET",
+              url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/event/" + detailsID,
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              headers: { 'Authorization': localStorage.userApiKey },
+              success: function (response) {
+                if (response["error"] == true)
+                {
+                  console.log(response["message"]);
+                }
+                else
+                {
+                  eventDetails = response;
+                  $('#detailsContent').append('<div><img class="eventImage" src=' + response["event_image"] + '></div><div class="eventTitle">' + response["event_title"] + '</div><div class="eventDescription">' + response["event_description"] + '</div>');
+                  var tempString = '';
+                  $.each(response, function (index, itemData) {
+                    if (index != "error" && index != "event_title" && index != "event_image" && index != "event_description" && index != "event_description_short" && index != "event_accepted" && index != "QR Code" && index != "Event Website" && index != "Event Latitude" && index != "Event Longitude")
+                    {
+                      console.log(index);
+                        switch (index) {
+                          case ('Event Tickets'):
+                            if (itemData == 0)
+                            {
+                              tempString += '<tr><th>' + index + '</th><td>' + "Tickets are not required" + '</td></tr></div';
+                            }
+                            else {
+                              tempString += '<tr><th>' + index + '</th><td>' + "Tickets are required" + '</td></tr></div';
+                            }
+                            break;
+                          case ("Event card payment"):
+                            if (itemData == 0)
+                            {
+                              tempString += '<tr><th>' + index + '</th><td>' + "Card payment is not supported" + '</td></tr></div';
+                            }
+                            else {
+                              tempString += '<tr><th>' + index + '</th><td>' + "You can pay by card" + '</td></tr></div';
+                            }
+                            break;
+                          case ("Event max participants"):
+                            if (itemData == 0)
+                            {
+                              tempString += '<tr><th>' + index + '</th><td>' + "Unlimited" + '</td></tr></div';
+                            }
+                            else {
+                              tempString += '<tr><th>' + index + '</th><td>' + itemData + '</td></tr></div';
+                            }
+                            break;
+                          default:
                             tempString += '<tr><th>' + index + '</th><td>' + itemData + '</td></tr></div';
-                          }
-                          break;
-                        default:
-                          tempString += '<tr><th>' + index + '</th><td>' + itemData + '</td></tr></div';
-                          break;
-                      }
+                            break;
+                        }
 
 
-                  }
-                });
-                tempString += '</table></div>';
-                $('#detailsContent').append('<div class="eventTable"><table class="eventTableStyle">' + tempString);
-                $('#detailsContent').append('<div><img class="eventQRCode" id="QRcode" src=' + response["QR Code"] + '></div>');
+                    }
+                  });
+                  tempString += '</table></div>';
+                  $('#detailsContent').append('<div class="eventTable"><table class="eventTableStyle">' + tempString);
+                  $('#detailsContent').append('<div><img class="eventQRCode" id="QRcode" src=' + response["QR Code"] + '></div>');
+                }
+              },
+              error: function (errormessage) {
+                  console.log(errormessage);
               }
-            },
-            error: function (errormessage) {
-                console.log(errormessage);
-            }
-        });
+          });
+
+  }
+  else{
+    alert("You dont have internet connection. Action cannot be performed.")
+  }
 
 }
 
 function downloadUserEvents()
 {
-  $.ajax({
-            type: "GET",
-            url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/getAllUserEvents",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            headers: { 'Authorization': '7194581c02ab6087e7da5881be984fe0' },
-            success: function (response) {
-              if (response["error"] == true)
-              {
-                console.log(response["message"]);
-              }
-              else {
-
-                var userDataTable = "";
-
-                userDataTable += '<tr><th>' + "Login:" + '</th><td>' + userCredentialsData["name"] + '</td></tr></div';
-                userDataTable += '<tr><th>' + "Email Address:" + '</th><td>' + userCredentialsData["email"] + '</td></tr></div';
-
-
-                userDataTable += '</table></div>';
-                $('#userCredData').append('<div class="eventTable"><table class="eventTableStyle">' + userDataTable);
-
-                if (response["events"].length == 0)
+  if (checkConnection()){
+    $.ajax({
+              type: "GET",
+              url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/getAllUserEvents",
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              headers: { 'Authorization': localStorage.userApiKey },
+              success: function (response) {
+                if (response["error"] == true)
                 {
-                  $('#userEventsList').append('<p>You have not subscribed to any event yet</p>');
+                  console.log(response["message"]);
                 }
                 else {
-                  for(var i = 0; i < response["events"].length; i += 1)
+
+                  var userDataTable = "";
+
+                  userDataTable += '<tr><th>' + "Login:" + '</th><td>' + localStorage.userLogin + '</td></tr></div';
+                  userDataTable += '<tr><th>' + "Email Address:" + '</th><td>' + localStorage.userEmail + '</td></tr></div';
+
+
+                  userDataTable += '</table></div>';
+                  $('#userCredData').append('<div class="eventTable"><table class="eventTableStyle">' + userDataTable);
+
+                  if (response["events"].length == 0)
                   {
-                     $('#userEventsList').append('<li class="listItem"><a id="eventListItem" onclick="goToEventDetails(' + response["events"][i]["event_id"] + ')"><img src=' + response["events"][i]["event_image"] + '><div class="listTitle">' + response["events"][i]["event_title"] + '</div>' + '<div class="listDesc">' + response["events"][i]["event_description_short"] + '</div>' + '<div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">' + response["events"][i]["event_start_date"] + '</div>' + '<div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">' + response["events"][i]["participants"] + '</div>'+ '</div></a></li>').listview('refresh');
+                    $('#userNoEvents').append('<p>You have not subscribed to any event yet</p>');
+                  }
+                  else {
+                    for(var i = 0; i < response["events"].length; i += 1)
+                    {
+                       $('#userEventsList').append('<li class="listItem"><a id="eventListItem" onclick="goToEventDetails(' + response["events"][i]["event_id"] + ')"><img src=' + response["events"][i]["event_image"] + '><div class="listTitle">' + response["events"][i]["event_title"] + '</div>' + '<div class="listDesc">' + response["events"][i]["event_description_short"] + '</div>' + '<div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">' + response["events"][i]["event_start_date"] + '</div>' + '<div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">' + response["events"][i]["participants"] + '</div>'+ '</div></a></li>').listview('refresh');
+                    }
                   }
                 }
+              },
+              error: function (errormessage) {
+                  console.log(errormessage);
               }
-            },
-            error: function (errormessage) {
-                console.log(errormessage);
-            }
-        });
-}
+          });
+  }
+  else{
+    alert("You dont have internet connection. Action cannot be performed.")
+  }
 
-
-function onConfirm(buttonIndex) {
-    alert('You selected button ' + buttonIndex);
-    var options = { dimBackground: true };
 }
 
 function scan()
 {
   console.log("Starting scanning");
-
+  showActivityIndicator("Scanner is turning on...")
   cordova.plugins.barcodeScanner.scan(
          function (result) {
               if(!result.cancelled){
@@ -458,14 +536,12 @@ function scan()
                           downloadEventDetails(result.text);
                           hideActivityIndicator();
 
-                          console.log(result.text);
-
-
                      }else{
                         alert("Sorry, only qr codes are supported");
                      }
               }else{
                 //scan was dismissed by user, no alert
+                hideActivityIndicator();
               }
            },
            function (error) {
@@ -534,13 +610,13 @@ function createNewEvent()
 
 function sendEventData(newEventData){
 
-  console.log(newEventData.even);
+  if (checkConnection()){
     $.ajax({
               type: "POST",
               url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/createEvent",
               contentType: "application/json; charset=utf-8",
               dataType: "json",
-              headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': "0510427259451e8d38bf38ef2a5b2bac"},
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': localStorage.userApiKey},
               data: jQuery.param({event_title: newEventData[0].value, event_description : newEventData[1].value, event_latitude : newEventData[2].value, event_longitude : newEventData[3].value, event_start_date : newEventData[4].value, event_end_date : newEventData[5].value, event_additional_info : newEventData[6].value, event_image : newEventData[7].value, event_max_participants : newEventData[8].value, event_description_short : newEventData[9].value, event_address : newEventData[10].value, event_city : newEventData[11].value, event_tickets : newEventData[13].value, event_card_payment : newEventData[14].value, event_accepted : "0", event_website : newEventData[12].value}),
               success: function (response) {
                   console.log(response);
@@ -560,5 +636,30 @@ function sendEventData(newEventData){
                   alert("There was an error - try again later");
               }
           });
+  }
+  else{
+    alert("You dont have internet connection. Action cannot be performed.")
+  }
 
+}
+
+function checkConnection() {
+    var networkState = navigator.connection.type;
+    var isConnected = false;
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown connection';
+    states[Connection.ETHERNET] = 'Ethernet connection';
+    states[Connection.WIFI]     = 'WiFi connection';
+    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    states[Connection.CELL]     = 'Cell generic connection';
+    states[Connection.NONE]     = 'No network connection';
+
+    if (states[networkState] != 'No network connection' ||  states[networkState] != 'Unknown connection' || states[networkState] != 'Cell generic connection')
+    {
+      isConnected = true;
+    }
+
+    return isConnected;
 }

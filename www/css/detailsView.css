@@ -4,6 +4,7 @@
   font-size: 25px;
   width: 100%;
   margin-top: 10px;
+
 }
 
 .eventImage {
@@ -25,6 +26,7 @@
   font-weight: lighter !important;
   margin-top: 20px;
   line-height: 150%;
+
 }
 
 .eventTable{
@@ -38,12 +40,21 @@
   font-weight: lighter !important;
   overflow-x:auto
 }
-
+td{
+  text-align: right;
+}
+th {
+    height: 50px;
+}
 .eventTableStyle{
   width: 100%;
   margin-left: 10px;
   text-align: left;
   font-weight: lighter !important;
+  background : #78909C;
+  border-radius: 5px;
+  table-layout: fixed;
+  height: 50px;
 }
 
 .eventQRCode{

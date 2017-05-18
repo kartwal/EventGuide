@@ -117,7 +117,8 @@
       <div data-role="page" id="listPage">
 
         <div data-role="header" data-position="fixed">
-             <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
+              <a onclick="refreshList()" class="ui-btn-left buttonHeader" data-iconpos="notext"/><img src="img/icons/reloadIcon.png"></a>
+              <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
               <a href="#settings" class="ui-btn-right buttonHeader" data-transition="slide" data-iconpos="notext"/><img src="img/icons/userIcon.png"></a>
         </div>
 
@@ -153,7 +154,6 @@
 
   		  <div data-role="main" class="ui-content">
           <div id="detailsContent">
-
               <!-- content goes here -->
           </div>
   		  </div>
@@ -168,14 +168,15 @@
             <a href="#inviteUsers" class="buttonToolbar" data-transition="slide" reverse="false">
               <img src="img/icons/shareIcon.png">
             </a>
-            <a onclick="createEventInCalendar()" class="buttonToolbar">
+            <a onclick="askToAddIntoCalendar()" class="buttonToolbar">
               <img src="img/icons/calendarIconWhite.png">
             </a>
-            <a onclick="signUserToEvent()" class="buttonToolbar">
+            <a onclick="askToSign()" class="buttonToolbar">
               <img src="img/icons/addIcon.png">
             </a>
         </div>
   		</div>
+
 
       <div data-role="page" id="inviteUsers">
 
@@ -295,13 +296,15 @@
               <h1><img border="0" src="img/EventGuideLogoSmall.png" class="headerImg"/></h1>
   		  </div>
 
-  		  <div data-role="main" class="ui-content">
+  		  <div data-role="main" class="ui-content" id="settingsContent">
 
           <div id="userCredData">
 
           </div>
 
-          <div class="userHeader">User's Events</div>
+          <div class="userHeader">Events in which you will participate</div>
+
+          <div class="userNoEvents" id="userNoEvents"></div>
 
             <div id="userEventsContainer">
               <ul data-role="listview" data-filter="true" data-input="#filterBasic-input" id="userEventsList">
