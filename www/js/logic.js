@@ -111,7 +111,7 @@ function loginInto(userEmail, userPassword)
           });
   }
   else{
-    alert("You dont have internet connection. Action cannot be performed.")
+    alert("You dont have internet connection. Action cannot be performed.");
   }
 
 }
@@ -147,7 +147,7 @@ function registerAccount(userEmail, userPassword, userLogin)
           });
   }
   else{
-    alert("You dont have internet connection. Action cannot be performed.")
+    alert("You dont have internet connection. Action cannot be performed.");
   }
 
 }
@@ -194,7 +194,7 @@ function signUserToEvent(buttonIndex)
             });
     }
     else{
-      alert("You dont have internet connection. Action cannot be performed.")
+      alert("You dont have internet connection. Action cannot be performed.");
     }
 
   }
@@ -363,7 +363,7 @@ function downloadEventsList()
           });
   }
   else{
-    alert("You dont have internet connection. Action cannot be performed.")
+    alert("You dont have internet connection. Action cannot be performed.");
   }
 }
 
@@ -394,7 +394,7 @@ function downloadUsers()
           });
   }
   else{
-    alert("You dont have internet connection. Action cannot be performed.")
+    alert("You dont have internet connection. Action cannot be performed.");
   }
 
 }
@@ -470,7 +470,7 @@ function downloadEventDetails(detailsID)
 
   }
   else{
-    alert("You dont have internet connection. Action cannot be performed.")
+    alert("You dont have internet connection. Action cannot be performed.");
   }
 
 }
@@ -518,7 +518,7 @@ function downloadUserEvents()
           });
   }
   else{
-    alert("You dont have internet connection. Action cannot be performed.")
+    alert("You dont have internet connection. Action cannot be performed.");
   }
 
 }
@@ -638,7 +638,7 @@ function sendEventData(newEventData){
           });
   }
   else{
-    alert("You dont have internet connection. Action cannot be performed.")
+    alert("You dont have internet connection. Action cannot be performed.");
   }
 
 }
