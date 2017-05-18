@@ -1,7 +1,6 @@
 var userCredentialsData = {};
 var eventDetails = {};
 
-
 function validateLogin() {
   $("#loginForm").validate({
     rules: {
@@ -204,7 +203,7 @@ $(document).on('pagechange', "#detailPage",function(){
 
 });
 
-$(document).on('pagecreate', "#inviteUsers",function(){
+$(document).on('pagebeforeshow', "#inviteUsers",function(){
   $('#usersSet').empty();
   downloadUsers();
 });
@@ -456,8 +455,11 @@ function scan()
                      if(result.format == "QR_CODE"){
                           $.mobile.pageContainer.pagecontainer('change', '#detailPage', {reverse: false, changeHash: true, transition: 'slide'});
                           showActivityIndicator("Downloading event details...");
-                          downloadEventDetails(value);
+                          downloadEventDetails(result.text);
                           hideActivityIndicator();
+
+                          console.log(result.text);
+
 
                      }else{
                         alert("Sorry, only qr codes are supported");

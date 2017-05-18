@@ -29,5 +29,18 @@
 
 	  <access origin="*"/>
 
+    <platform name="android">
+              <icon src="res/android/mipmap-hdpi/ic_launcher.png" density="ldpi" />
+              <icon src="res/android/mipmap-ldpi/ic_launcher.png" density="mdpi" />
+              <icon src="res/android/mipmap-mdpi/ic_launcher.png" density="hdpi" />
+              <icon src="res/android/mipmap-xhdpi/ic_launcher.png" density="xhdpi" />
+     </platform>
+
+     <platform name="android">
+       <splash src="res/screen/android/splash-port-hdpi.png" density="port-hdpi"/>
+     </platform>
+
+
+
 
 </widget>
