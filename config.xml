@@ -18,6 +18,7 @@
     <plugin name="cordova-plugin-calendar" />
     <plugin name="cordova-plugin-inappbrowser" />
     <plugin name="cordova-plugin-pdialog" />
+    <plugin name="cordova-plugin-splashscreen" />
 
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="3" />
 
@@ -37,7 +38,7 @@
      </platform>
 
      <platform name="android">
-       <splash src="res/screen/android/splash-port-hdpi.png" density="port-hdpi"/>
+       <splash src="res/screen/android/splash.png"/>
      </platform>
 
 
