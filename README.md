@@ -19,26 +19,19 @@ If you want to read more detailed description of functions of this app, see [wik
 
 ## Application Functions
 
-This app provide several functions. You can:
-1. Create you own account
-2. Search through provided events
-3. Check event
-    3. you can navigate to event place
-    3. you can add event into your calendar
-    3. you can go to event website
-    3. you can invite other app users to particular event
-    3. you can sing in this event
-4. Creating events
-    4. app gives you ability to creating new event
-    4. event MUST be accepted by admin before other users can see it
-    4. you have to prepare your own image (or you can link image from your website)
-    4. other information which you have to input you can check inside app or in [wiki](https://github.com/kartwal/EventGuide/wiki)
 
-1. Item 1
-1. Item 2
-1. Item 3
-    1. Item 3a
-    1. Item 3b
+1. Create you own account
+1. Search through provided events
+1. Check event
+    1. ou can navigate to event place
+    1. you can add event into your calendar
+    1. you can go to event website
+    1. you can sing in to this event
+1. Creating events
+    1. app gives you ability to creating new event
+    1. event MUST be accepted by admin before other users can see it
+    1. you have to prepare your own image (or you can link image from your website)
+    1. other information which you have to input you can check inside app or in [wiki](https://github.com/kartwal/EventGuide/wiki)
 
 
 
