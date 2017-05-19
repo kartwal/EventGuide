@@ -714,13 +714,14 @@ function checkConnection() {
     states[Connection.CELL]     = 'Cell generic connection';
     states[Connection.NONE]     = 'No network connection';
 
-    if (states[networkState] != 'No network connection' ||  states[networkState] != 'Unknown connection' || states[networkState] != 'Cell generic connection')
+    if (networkState != Connection.NONE ||  networkState != Connection.UNKNOWN || networkState != Connection.CELL)
     {
       alert(states[networkState]);
       isConnected = true;
     }
     else {
       alert("No network : " + states[networkState]);
+      alert("Error");
     }
 
     return isConnected;
