@@ -14,7 +14,7 @@ For provisioning profile file you have to get access to Apple Developer Program.
 
 ## Project Wiki
 
-If you want to read more detailed description of functions of this app, see [wiki](https://build.phonegap.com)
+If you want to read more detailed description of functions of this app, see [wiki](https://github.com/kartwal/EventGuide/wiki)
 
 
 ### Installing
@@ -70,8 +70,8 @@ This app provide several functions. You can:
 
 ## Authors
 
-* **Kamil Walas* - *Project manager* - [kartwal](https://github.com/kartwal/)
-* **Adrianna Gałka* - *Co-worker* - [kartwal](https://github.com/kartwal/)
+* *Kamil Walas* - *Project manager* - [kartwal](https://github.com/kartwal/)
+* *Adrianna Gałka* - *Co-worker* - [kartwal](https://github.com/kartwal/)
 
 
 
