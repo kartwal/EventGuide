@@ -44,7 +44,7 @@ If you want to read more detailed description of functions of this app, see [wik
 ## Authors
 
 * *Kamil Walas* - *Project manager* - [kartwal](https://github.com/kartwal/)
-* *Adrianna Gałka* - *Co-worker* - [kartwal](https://github.com/adaa0704)
+* *Adrianna Gałka* - *Co-worker* - [adaa0704](https://github.com/adaa0704)
 
 
 
