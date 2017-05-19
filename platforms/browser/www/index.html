@@ -231,10 +231,10 @@
                 <input type="text" name="textinput" id="longitude" placeholder="Enter longitude" value="">
 
                 <label for="text" color = "white">Start date:</label>
-                <input type="text" name="textinput" id="startDate" placeholder="YYYY:mm:DD HH:MM format" value="">
+                <input type="text" name="textinput" id="startDate" placeholder="YYYY-mm-DD HH:MM format" value="">
 
                 <label for="textinput" color = "white">End date:</label>
-                <input type="text" name="textinput" id="endDate" placeholder="YYYY:mm:DD HH:MM format" value="">
+                <input type="text" name="textinput" id="endDate" placeholder="YYYY-mm-DD HH:MM format" value="">
 
                 <label for="textarea-1">Event Additional info:</label>
                 <textarea cols="40" rows="8" name="textarea" id="eventAdditionalInfo" placeholder="Event Additional Info"></textarea>
@@ -308,6 +308,14 @@
 
             <div id="userEventsContainer">
               <ul data-role="listview" data-filter="true" data-input="#filterBasic-input" id="userEventsList">
+                <!-- content from downloadEventsList goes here -->
+              </ul>
+            </div>
+
+            <div class="userHeader">Events created by you</div>
+            <div class="userNoEvents" id="userNoCreatedEvents"></div>
+            <div id="userEventsContainer">
+              <ul data-role="listview" data-filter="true" data-input="#filterBasic-input" id="userEventsCreatedList">
                 <!-- content from downloadEventsList goes here -->
               </ul>
             </div>

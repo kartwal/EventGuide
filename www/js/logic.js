@@ -241,6 +241,8 @@ $(document).on('pageshow', "#settings",function(){
   $('#userEventsList').empty();
   $('#userCredData').empty();
   $('#userNoEvents').empty();
+  $('#userNoCreatedEvents').empty();
+  $('#userEventsCreatedList').empty();
   downloadUserEvents();
   $('#userEventsContainer').show();
   $('#settingsContent').show();
@@ -514,6 +516,7 @@ function downloadUserEvents()
                        $('#userEventsList').append('<li class="listItem"><a id="eventListItem" onclick="goToEventDetails(' + response["events"][i]["event_id"] + ')"><img src=' + response["events"][i]["event_image"] + '><div class="listTitle">' + response["events"][i]["event_title"] + '</div>' + '<div class="listDesc">' + response["events"][i]["event_description_short"] + '</div>' + '<div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">' + response["events"][i]["event_start_date"] + '</div>' + '<div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">' + response["events"][i]["participants"] + '</div>'+ '</div></a></li>').listview('refresh');
                     }
                   }
+                  downloadUserCreatedEvents();
                 }
               },
               error: function (errormessage) {
@@ -532,7 +535,7 @@ function downloadUserCreatedEvents()
   if (checkConnection()){
     $.ajax({
               type: "GET",
-              url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/getAllUserEvents",
+              url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/getAllUserCreatedEvents",
               contentType: "application/json; charset=utf-8",
               dataType: "json",
               headers: { 'Authorization': localStorage.userApiKey },
@@ -545,7 +548,7 @@ function downloadUserCreatedEvents()
 
                   if (response["events"].length == 0)
                   {
-                    $('#userNoEvents').append('<p>You have not subscribed to any event yet</p>');
+                    $('#userNoCreatedEvents').append('<p>You have not crated any event yet. Create one !</p>');
                   }
                   else {
                     for(var i = 0; i < response["events"].length; i += 1)
@@ -559,6 +562,11 @@ function downloadUserCreatedEvents()
                   console.log(errormessage);
               }
           });
+  }
+  else{
+    alert("You dont have internet connection. Action cannot be performed.");
+  }
+
 }
 
 function scan()
