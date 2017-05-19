@@ -49,7 +49,7 @@ This app provide several functions. You can:
 1. Create you own account
 2. Search through provided events
 3. Check event
-    3. you can navigate to event place
+    3. you can navigate to event place 3a
     3. you can add event into your calendar
     3. you can go to event website
     3. you can invite other app users to particular event
