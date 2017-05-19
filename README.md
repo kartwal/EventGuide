@@ -26,7 +26,7 @@ If you want check this application on your Android device
 ```
 You don't have to do this, but it's recommended - you can provide some changes in this app and you can test it.
 ```
-2. Login at https://build.phonegap.com
+2. Login at [phonegapbuild](https://build.phonegap.com)
 
 ```
 If you need to create account - do it, it's free.
@@ -49,16 +49,16 @@ This app provide several functions. You can:
 1. Create you own account
 2. Search through provided events
 3. Check event
-⋅⋅a)you can navigate to event place
-⋅⋅b)you can add event into your calendar
-⋅⋅c)you can go to event website
-⋅⋅d)you can invite other app users to particular event
-⋅⋅e)you can sing in this event
+⋅⋅*you can navigate to event place
+⋅⋅*you can add event into your calendar
+⋅⋅*you can go to event website
+⋅⋅*you can invite other app users to particular event
+⋅⋅*you can sing in this event
 4. Creating events
-⋅⋅a)app gives you ability to creating new event
-⋅⋅b)event MUST be accepted by admin before other users can see it
-⋅⋅c)you have to prepare your own image (or you can link image from your website)
-⋅⋅d)other information which you have to input you can check inside app or in WIKI
+⋅⋅*app gives you ability to creating new event
+⋅⋅*event MUST be accepted by admin before other users can see it
+⋅⋅*you have to prepare your own image (or you can link image from your website)
+⋅⋅*other information which you have to input you can check inside app or in WIKI
 
 
 
