@@ -17,39 +17,13 @@ For provisioning profile file you have to get access to Apple Developer Program.
 If you want to read more detailed description of functions of this app, see [wiki](https://github.com/kartwal/EventGuide/wiki)
 
 
-### Installing
-
-If you want check this application on your Android device 
-
-1. Fork or clone this repo
-
-```
-You don't have to do this, but it's recommended - you can provide some changes in this app and you can test it.
-```
-2. Login at [phonegapbuild](https://build.phonegap.com)
-
-```
-If you need to create account - do it, it's free.
-```
-
-3. Add link to repo with this application
-```
-https://github.com/kartwal/EventGuide
-
-or 
-
-your private link
-```
-4. Download app and run it on your device.
-
-
 ## Application Functions
 
 This app provide several functions. You can:
 1. Create you own account
 2. Search through provided events
 3. Check event
-    3. you can navigate to event place 3a
+    3. you can navigate to event place
     3. you can add event into your calendar
     3. you can go to event website
     3. you can invite other app users to particular event
@@ -60,6 +34,11 @@ This app provide several functions. You can:
     4. you have to prepare your own image (or you can link image from your website)
     4. other information which you have to input you can check inside app or in [wiki](https://github.com/kartwal/EventGuide/wiki)
 
+1. Item 1
+1. Item 2
+1. Item 3
+    1. Item 3a
+    1. Item 3b
 
 
 
