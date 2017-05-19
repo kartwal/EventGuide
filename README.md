@@ -51,14 +51,16 @@ This app provide several functions. You can:
 3. Check event
     3. you can navigate to event place
     3. you can add event into your calendar
-    3. *you can go to event website
-    3. *you can invite other app users to particular event
-    3. *you can sing in this event
+    3. you can go to event website
+    3. you can invite other app users to particular event
+    3. you can sing in this event
 4. Creating events
     4. app gives you ability to creating new event
     4. event MUST be accepted by admin before other users can see it
     4. you have to prepare your own image (or you can link image from your website)
     4. other information which you have to input you can check inside app or in [wiki](https://github.com/kartwal/EventGuide/wiki)
+
+
 
 
 ## Built With
