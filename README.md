@@ -1,4 +1,4 @@
-# A Blank PhoneGap App
+![eventGuideLogo](http://kartwal.ayz.pl/EventGuideLogo.png)
 
 ## Usage
 
