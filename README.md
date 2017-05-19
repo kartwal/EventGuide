@@ -6,86 +6,73 @@ Search, add, participate - just use this app !
 
 ## Getting Started
 
-You can deploy this app by PhoneGapBuild which is available at https://build.phonegap.com
+You can deploy this app by PhoneGapBuild which is available at [phonegapbuild](https://build.phonegap.com)
 
 ### App is available on Android - for iOS you must provide provisioning profile file !
 
 For provisioning profile file you have to get access to Apple Developer Program.
 
-```
-Give examples
-```
+## Project Wiki
+
+If you want to read more detailed description of functions of this app, see [wiki](https://build.phonegap.com)
+
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+If you want check this application on your Android device 
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+1. Fork or clone this repo
 
 ```
-until finished
+You don't have to do this, but it's recommended - you can provide some changes in this app and you can test it.
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+2. Login at https://build.phonegap.com
 
 ```
-Give an example
+If you need to create account - do it, it's free.
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
+3. Add link to repo with this application
 ```
-Give an example
+https://github.com/kartwal/EventGuide
+
+or 
+
+your private link
 ```
+4. Download app and run it on your device.
 
-## Deployment
 
-Add additional notes about how to deploy this on a live system
+## Application Functions
+
+This app provide several functions. You can:
+1. Create you own account
+2. Search through provided events
+3. Check event
+⋅⋅a)you can navigate to event place
+⋅⋅b)you can add event into your calendar
+⋅⋅c)you can go to event website
+⋅⋅d)you can invite other app users to particular event
+⋅⋅e)you can sing in this event
+4. Creating events
+⋅⋅a)app gives you ability to creating new event
+⋅⋅b)event MUST be accepted by admin before other users can see it
+⋅⋅c)you have to prepare your own image (or you can link image from your website)
+⋅⋅d)other information which you have to input you can check inside app or in WIKI
+
+
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [phonegapbuild](https://build.phonegap.com) - hybrid technology which provides online building, huge number of  plugins etc.
+* [jquerymobile](https://jquerymobile.com) - framework for touch-friendly ui
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Kamil Walas* - *Project manager* - [kartwal](https://github.com/kartwal/)
+* **Adrianna Gałka* - *Co-worker* - [kartwal](https://github.com/kartwal/)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
 
 
