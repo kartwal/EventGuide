@@ -716,12 +716,9 @@ function checkConnection() {
 
     if (networkState == Connection.NONE ||  networkState == Connection.UNKNOWN || networkState == Connection.CELL)
     {
-      alert("No network : " + states[networkState]);
-      alert("Error");
       isConnected = false;
     }
     else {
-      alert("ok");
       isConnected = true;
     }
 
