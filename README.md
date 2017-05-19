@@ -58,8 +58,13 @@ This app provide several functions. You can:
     *app gives you ability to creating new event
     *event MUST be accepted by admin before other users can see it
     *you have to prepare your own image (or you can link image from your website)
-    *other information which you have to input you can check inside app or in WIKI
+*other information which you have to input you can check inside app or in [wiki](https://github.com/kartwal/EventGuide/wiki)
 
+1. Item 1
+1. Item 2
+1. Item 3
+    1. Item 3a
+    1. Item 3b
 
 
 ## Built With
@@ -71,7 +76,7 @@ This app provide several functions. You can:
 ## Authors
 
 * *Kamil Walas* - *Project manager* - [kartwal](https://github.com/kartwal/)
-* *Adrianna Gałka* - *Co-worker* - [kartwal](https://github.com/kartwal/)
+* *Adrianna Gałka* - *Co-worker* - [kartwal](https://github.com/adaa0704)
 
 
 
