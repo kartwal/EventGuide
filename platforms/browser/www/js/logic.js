@@ -271,6 +271,10 @@ $(document).on('pagecreate', '#login', function(){
     }
 });
 
+$(document).on('pagebeforehide', '#createEvent', function(){
+  clearCreateForm();
+});
+
 
 function refreshList()
 {
@@ -605,6 +609,18 @@ function createNewEvent()
     console.log(dict);
     sendEventData(dict);
   }
+
+}
+
+function clearCreateForm()
+{
+  var dict = [];
+  $('#createEventFielset :input').each(function(index,element) {
+      if (element.value != "")
+      {
+        element.value = ""
+      }
+  });
 
 }
 

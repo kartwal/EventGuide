@@ -271,6 +271,10 @@ $(document).on('pagecreate', '#login', function(){
     }
 });
 
+$(document).on('pagebeforehide', '#createEvent', function(){
+  clearCreateForm();
+});
+
 
 function refreshList()
 {
@@ -523,6 +527,40 @@ function downloadUserEvents()
 
 }
 
+function downloadUserCreatedEvents()
+{
+  if (checkConnection()){
+    $.ajax({
+              type: "GET",
+              url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/getAllUserEvents",
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+              headers: { 'Authorization': localStorage.userApiKey },
+              success: function (response) {
+                if (response["error"] == true)
+                {
+                  console.log(response["message"]);
+                }
+                else {
+
+                  if (response["events"].length == 0)
+                  {
+                    $('#userNoEvents').append('<p>You have not subscribed to any event yet</p>');
+                  }
+                  else {
+                    for(var i = 0; i < response["events"].length; i += 1)
+                    {
+                       $('#userEventsCreatedList').append('<li class="listItem"><a id="eventListItem" onclick="goToEventDetails(' + response["events"][i]["event_id"] + ')"><img src=' + response["events"][i]["event_image"] + '><div class="listTitle">' + response["events"][i]["event_title"] + '</div>' + '<div class="listDesc">' + response["events"][i]["event_description_short"] + '</div>' + '<div class="listDate"><img class="listIconSize" src="img/icons/calendarIcon.png">' + response["events"][i]["event_start_date"] + '</div>' + '<div class="listNumberUsers"><img class="listIconSize" src="img/icons/usersIcon.png">' + response["events"][i]["participants"] + '</div>'+ '</div></a></li>').listview('refresh');
+                    }
+                  }
+                }
+              },
+              error: function (errormessage) {
+                  console.log(errormessage);
+              }
+          });
+}
+
 function scan()
 {
   console.log("Starting scanning");
@@ -608,6 +646,18 @@ function createNewEvent()
 
 }
 
+function clearCreateForm()
+{
+  var dict = [];
+  $('#createEventFielset :input').each(function(index,element) {
+      if (element.value != "")
+      {
+        element.value = ""
+      }
+  });
+
+}
+
 function sendEventData(newEventData){
 
   if (checkConnection()){
@@ -656,6 +706,7 @@ function checkConnection() {
     states[Connection.CELL]     = 'Cell generic connection';
     states[Connection.NONE]     = 'No network connection';
 
+    alert(states[networkState]);
     if (states[networkState] != 'No network connection' ||  states[networkState] != 'Unknown connection' || states[networkState] != 'Cell generic connection')
     {
       isConnected = true;
