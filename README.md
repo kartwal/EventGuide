@@ -49,16 +49,16 @@ This app provide several functions. You can:
 1. Create you own account
 2. Search through provided events
 3. Check event
-⋅⋅*you can navigate to event place
-⋅⋅*you can add event into your calendar
-⋅⋅*you can go to event website
-⋅⋅*you can invite other app users to particular event
-⋅⋅*you can sing in this event
+*you can navigate to event place
+*you can add event into your calendar
+*you can go to event website
+*you can invite other app users to particular event
+*you can sing in this event
 4. Creating events
-⋅⋅*app gives you ability to creating new event
-⋅⋅*event MUST be accepted by admin before other users can see it
-⋅⋅*you have to prepare your own image (or you can link image from your website)
-⋅⋅*other information which you have to input you can check inside app or in WIKI
+*app gives you ability to creating new event
+*event MUST be accepted by admin before other users can see it
+*you have to prepare your own image (or you can link image from your website)
+*other information which you have to input you can check inside app or in WIKI
 
 
 
