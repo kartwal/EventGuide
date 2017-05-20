@@ -159,6 +159,8 @@ function signUserToEvent(buttonIndex)
     if (checkConnection()){
       showActivityIndicator("Signing to evnet...");
 
+      console.log(eventDetails["Event ID"]);
+
       $.ajax({
                 type: "POST",
                 url: "http://kartwal.ayz.pl/EventGuide_API/v1/index.php/signUserToEvent",
@@ -425,7 +427,7 @@ function downloadEventDetails(detailsID)
                   $('#detailsContent').append('<div><img class="eventImage" src=' + response["event_image"] + '></div><div class="eventTitle">' + response["event_title"] + '</div><div class="eventDescription">' + response["event_description"] + '</div>');
                   var tempString = '';
                   $.each(response, function (index, itemData) {
-                    if (index != "error" && index != "event_title" && index != "event_image" && index != "event_description" && index != "event_description_short" && index != "event_accepted" && index != "QR Code" && index != "Event Website" && index != "Event Latitude" && index != "Event Longitude")
+                    if (index != "error" && index != "event_title" && index != "event_image" && index != "event_description" && index != "event_description_short" && index != "event_accepted" && index != "QR Code" && index != "Event Website" && index != "Event Latitude" && index != "Event Longitude" && index != "Event Author ID")
                     {
                       console.log(index);
                         switch (index) {
@@ -647,8 +649,7 @@ function createNewEvent()
   {
     alert("You must fill all the fields");
   }else {
-    alert("Great !");
-    console.log(dict);
+
     sendEventData(dict);
   }
 
@@ -667,6 +668,8 @@ function clearCreateForm()
 }
 
 function sendEventData(newEventData){
+
+  showActivityIndicator("Creating event...");
 
   if (checkConnection()){
     $.ajax({
